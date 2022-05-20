@@ -10,23 +10,12 @@ This repository contains all documentation about the NanoGiants tech stack and o
 <!-- This has two items called first and second respectively. Remove them and use your own -->
 - [NanoGiants Docs](#nanogiants-docs)
   - [Table of contents](#table-of-contents)
-  - [First](#first)
-  - [Second](#second)
   - [Related work](#related-work)
   - [Contributing](#contributing)
   - [License](#license)
 
 <!-- section: Content -->
 <!-- This the actual content. -->
-
-## First
-
-**[back to top](#table-of-contents)**
-
-## Second
-
-**[back to top](#table-of-contents)**
-
 ## Related work
 <!-- section: Related work -->
 <!-- This section covers related works, further readings and tools that might be relevant or interesting for the reader. -->
