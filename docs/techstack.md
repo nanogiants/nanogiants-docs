@@ -11,7 +11,6 @@
   - [What is a tech stack?](#what-is-a-tech-stack)
   - [How do we visualize our tech stack?](#how-do-we-visualize-our-tech-stack)
   - [How do we maintain our tech stack?](#how-do-we-maintain-our-tech-stack)
-  - [Related work](#related-work)
 
 <!-- section: Content -->
 <!-- This the actual content. -->
@@ -42,12 +41,22 @@ The categories we use are listed as follows:
 **[back to top](#table-of-contents)**
 
 ## How do we maintain our tech stack?
+We meet in a group called the Tech Council. As a group, we discuss the current state of the tech stack as well as the tech radar and decide if we want to make changes to it. Anyone is eligible to suggest changes. He or she is responsible for presenting the proposal in an appropriate manner. The Council decides whether to accept or reject the proposed change, or whether it needs to be modified before it is accepted. 
 
-**[back to top](#table-of-contents)**
+A change request may include any of the following:
+- Adding a new technology to one of the predefined phases and categories
+- Moving an existing technology from one phase to another
+- Removing an existing technology from the tech stack altogether
 
-
-## Related work
-<!-- section: Related work -->
-<!-- This section covers related works, further readings and tools that might be relevant or interesting for the reader. -->
+Below is a list of criteria to consider when proposing a technology for our tech stack:
+- How well is the technology maintained?
+- How popular is the technology (e.g. Github stars, number of dependents, ...)?
+- Who is the backer or what company/community is behind this technology?
+- Is this technology likely to be future-proof?
+- How is this technology licensed? Can we use such technology?
+- What is the test coverage of this software? Are other metrics relevant (e.g., snyk)?
+- How many dependencies does this technology have?
+- Is this technology well documented?
+- Is this technology compatible with our existing tech stack and is it a suitable addition?
 
 **[back to top](#table-of-contents)**
