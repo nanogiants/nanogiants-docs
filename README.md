@@ -10,6 +10,7 @@ This repository contains all documentation about the NanoGiants tech stack and o
 <!-- This has two items called first and second respectively. Remove them and use your own -->
 - [NanoGiants Docs](#nanogiants-docs)
   - [Table of contents](#table-of-contents)
+  - [Development](#development)
   - [Tech Stack](#tech-stack)
   - [Related work](#related-work)
   - [Contributing](#contributing)
@@ -17,6 +18,11 @@ This repository contains all documentation about the NanoGiants tech stack and o
 
 <!-- section: Content -->
 <!-- This the actual content. -->
+
+## Development
+See [Development](docs/development.md)
+
+**[back to top](#table-of-contents)**
 
 ## Tech Stack
 See [tech stack](docs/techstack.md)
