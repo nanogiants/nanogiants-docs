@@ -12,6 +12,7 @@ This section describes how we develop software at NanoGiants
   - [Table of contents](#table-of-contents)
   - [Git commit messages?](#git-commit-messages)
     - [What is our git philosophy?](#what-is-our-git-philosophy)
+    - [Tooling](#tooling)
 
 <!-- section: Content -->
 <!-- This the actual content. -->
@@ -71,5 +72,8 @@ Note that these are modified rules of the 7 golden commit rules originally publi
 
 Avoid squashing commits as they alter the git history and possibly obscure reality. It is oke to 
 squash WIP commits to summarize them as a feature.
+
+### Tooling
+We use [commitlint](https://github.com/conventional-changelog/commitlint) in combination with [husky](https://github.com/typicode/husky) to ensure that commit messages are consistent with our guidelines. Obviously this only applies to structure and not semantics. You can find a config file here that holds the configuration for our guide [here](../files/development/git/commitlint.config.js).
 
 **[back to top](#table-of-contents)**
