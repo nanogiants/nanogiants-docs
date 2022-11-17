@@ -69,4 +69,7 @@ Here are the rules on how to write commit messages at NanoGiants:
 Note that these are modified rules of the 7 golden commit rules originally published by `cbeams`. For more context see
 `https://cbea.ms/git-commit/`.
 
+Avoid squashing commits as they alter the git history and possibly obscure reality. It is oke to 
+squash WIP commits to summarize them as a feature.
+
 **[back to top](#table-of-contents)**
