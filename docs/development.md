@@ -13,18 +13,13 @@ This section describes how we develop software at NanoGiants
   - [Git commit messages?](#git-commit-messages)
     - [What is our git philosophy?](#what-is-our-git-philosophy)
     - [Tooling](#tooling)
+  - [Branching Model](#branching-model)
   - [Pull Requests](#pull-requests)
     - [Creation of the pull request](#creation-of-the-pull-request)
     - [Basic configuration](#basic-configuration)
     - [Configuration of bots / checks](#configuration-of-bots--checks)
     - [Reviewing and Merging](#reviewing-and-merging)
     - [Best practises by NanoGiants teams](#best-practises-by-nanogiants-teams)
-  - [Versioning](#versioning)
-  - [Licensing](#licensing)
-  - [Documentation](#documentation)
-  - [Guiding Principles](#guiding-principles)
-  - [CI/CD](#cicd)
-  - [Quality Metrics (SonarCloud)](#quality-metrics-sonarcloud)
 
 
 <!-- section: Content -->
@@ -91,6 +86,25 @@ We use [commitlint](https://github.com/conventional-changelog/commitlint) in com
 
 **[back to top](#table-of-contents)**
 
+## Branching Model
+
+A branching model is a way of organizing and using branches in a version control system like Git. It specifies how developers should create, name, and merge branches. At NanoGiants we use [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow). It is designed to provide a clear separation between the different stages of the software development process and to make it easy for teams to collaborate on complex projects. The Gitflow model involves creating two main branches:
+
+* `master`: This branch represents the official release history of the project, and all changes that are merged into this branch are considered to be production-ready.
+* `develop`: This branch serves as the integration branch for all changes that are being developed.
+
+In addition to these two main branches, the Gitflow model involves creating additional branches for specific purposes:
+
+* `feature` branches: These branches are used to develop new features. When a feature is complete, it is merged back into the develop branch.
+* `release` branches: These branches are created from the develop branch when it is time to prepare for a new release. Release branches are used to finalize the features that will be included in the release and to fix any bugs that are discovered. When the release is ready, it is merged back into master and develop.
+* `hotfix` branches: These branches are used to quickly fix critical bugs in the production version of the software. Hotfix branches are created from the master branch, and when the fix is complete, it is merged back into both master and develop.
+
+![git flow branching model](../files/development/git/1492475213.png)
+
+The Gitflow command line interface (CLI) is a set of scripts that provide a high-level interface for working with Gitflow branches and releases. Using the Gitflow CLI can help streamline your workflow and make it easier to follow the Gitflow model consistently. It is available as part of the Git distribution and can be installed via package managers such as npm and Homebrew. More information can be found at https://github.com/nvie/gitflow.
+
+**[back to top](#table-of-contents)**
+
 ## Pull Requests
 Pull requests are a fundamental element to ensure quality of code especially for larger teams as well as larger projects. 
 The idea is that every pull request is reviewed by another person before eventually merging it into the base branch (i.e. 
@@ -140,16 +154,6 @@ a valid reason for it (i.e. many WiP commits). Even then let this be the excepti
 - [Moshpit Team](bestPractises/pullRequest-moshpit.md)
 - [Start11 Team](bestPractises/pullRequest-start11.md)
 
-## Versioning
 
-## Licensing
-
-## Documentation
-
-## Guiding Principles
-
-## CI/CD
-
-## Quality Metrics (SonarCloud)
 
 **[back to top](#table-of-contents)**
