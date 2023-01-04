@@ -16,7 +16,16 @@ This section describes how we develop software at NanoGiants
   - [Pull Requests](#pull-requests)
     - [Creation of the pull request](#creation-of-the-pull-request)
     - [Basic configuration](#basic-configuration)
+    - [Configuration of bots / checks](#configuration-of-bots--checks)
+    - [Reviewing and Merging](#reviewing-and-merging)
     - [Best practises by NanoGiants teams](#best-practises-by-nanogiants-teams)
+  - [Versioning](#versioning)
+  - [Licensing](#licensing)
+  - [Documentation](#documentation)
+  - [Guiding Principles](#guiding-principles)
+  - [CI/CD](#cicd)
+  - [Quality Metrics (SonarCloud)](#quality-metrics-sonarcloud)
+
 
 <!-- section: Content -->
 <!-- This the actual content. -->
@@ -84,8 +93,8 @@ We use [commitlint](https://github.com/conventional-changelog/commitlint) in com
 
 ## Pull Requests
 Pull requests are a fundamental element to ensure quality of code especially for larger teams as well as larger projects. 
-The idea is that every commit is reviewed by another person before eventually merging it into the base branch (i.e. 
-`develop`, `master`). The reviewer may give feedback and is able to reject the pull request, so that the developer that
+The idea is that every pull request is reviewed by another person before eventually merging it into the base branch (i.e. 
+`develop`, `master`). The reviewer may give feedback and is able to request changes, so that the developer that
 created the pull request incorporates the changes suggested by the reviewer (or argues against them). We at NanoGiants
 also work with pull requests (on Github). The workflow consists of 4 simple steps, that are described later in this 
 document. We want to emphasize that every team of the NanoGiants has to adhere to the basic structure (i.e. 4 simple steps).
@@ -104,9 +113,9 @@ a description. Both are mandatory (not by Github but by us).
 | Description | The description of the pull request | Describe what the PR does in a more detailed manner | Hold relevant information (i.e. what was tested, Definition of Done, link to Jira issue, ... ) | -                             |
 
 ### Basic configuration
-Here are many options available. See [best practises](#best-practises-by-nanogiants-teams) to got some ideas what you may
+Here are many options available. See [best practises](#best-practises-by-nanogiants-teams) to get some ideas what you may
 configure. There is only one thing every team has to adhere to and this is the reviewers section. Every pull request has 
-to be reviewed by at least one other person to ensure quality of code. Therefore suggest at least onw reviewer. Also every
+to be reviewed by at least one other person to ensure quality of code. Therefore suggest at least one reviewer. Also every
 repository has to be configured in a way that merging is blocked (even for administrators) when there were no reviews.
 
 ### Configuration of bots / checks
@@ -117,7 +126,7 @@ Other useful bots are Danger for Swift projects or the Travis CI Bot. See [best 
 
 ### Reviewing and Merging
 Reviewing a pull request is no easy task especially with bigger pull requests. So take your time and be as extensive and 
-specific as you see fit. The goal is not the bash / blame another developer but to ensure that code adheres to a certain 
+specific as you see fit. The goal is not to bash / blame another developer but to ensure that code adheres to a certain 
 standard of quality. For some pull requests it is a good idea to checkout the relevant branch and run it locally as some 
 changes may be open to race conditions are behave differently on different environments. It is better to see this at a
 reviewing stage instead on a production environment. When merging a PR do not opt for the squash option unless there is 
@@ -130,5 +139,17 @@ a valid reason for it (i.e. many WiP commits). Even then let this be the excepti
 - [Proxima Team](bestPractises/pullRequest-proxima.md)
 - [Moshpit Team](bestPractises/pullRequest-moshpit.md)
 - [Start11 Team](bestPractises/pullRequest-start11.md)
+
+## Versioning
+
+## Licensing
+
+## Documentation
+
+## Guiding Principles
+
+## CI/CD
+
+## Quality Metrics (SonarCloud)
 
 **[back to top](#table-of-contents)**
