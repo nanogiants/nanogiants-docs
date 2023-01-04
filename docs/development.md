@@ -104,6 +104,7 @@ Semantic versioning is based on the idea that different types of changes should 
 
 SemVer is managed by the Semantic Versioning organization, which maintains the official specification for semantic versioning. You can learn more about SemVer and the Semantic Versioning organization at [https://semver.org/](https://semver.org/).
 
+For build version numbers that might occur in some software types (i.e. Android, iOS) we use sequential versioning, where versions are represented by a simple incrementing number (i.e. 1, 2, 3) .
 
 **[back to top](#table-of-contents)**
 
