@@ -13,13 +13,14 @@ This section describes how we develop software at NanoGiants
   - [Git commit messages?](#git-commit-messages)
     - [What is our git philosophy?](#what-is-our-git-philosophy)
     - [Tooling](#tooling)
+  - [Versioning](#versioning)
   - [Pull Requests](#pull-requests)
     - [Creation of the pull request](#creation-of-the-pull-request)
     - [Basic configuration](#basic-configuration)
     - [Configuration of bots / checks](#configuration-of-bots--checks)
     - [Reviewing and Merging](#reviewing-and-merging)
     - [Best practises by NanoGiants teams](#best-practises-by-nanogiants-teams)
-  - [Versioning](#versioning)
+  - [Versioning](#versioning-1)
   - [Licensing](#licensing)
   - [Documentation](#documentation)
   - [Guiding Principles](#guiding-principles)
@@ -88,6 +89,21 @@ squash WIP commits to summarize them as a feature.
 
 ### Tooling
 We use [commitlint](https://github.com/conventional-changelog/commitlint) in combination with [husky](https://github.com/typicode/husky) to ensure that commit messages are consistent with our guidelines. Obviously this only applies to structure and not semantics. You can find a config file here that holds the configuration for our guide [here](../files/development/git/commitlint.config.js).
+
+**[back to top](#table-of-contents)**
+
+## Versioning
+
+Software versioning is the process of assigning unique names or numbers to different versions of a software program. It is a way of keeping track of the changes that have been made to the program over time and identifying which version of the software is the most current. Software versioning is important because it allows developers to communicate clearly about the state of the software, and it makes it easier for users to understand which version of the software they are using and whether they need to upgrade to a newer version. There are many different strategies for versioning software. We at NanoGiants rely on semantiv versioning.
+
+Semantic versioning, or SemVer for short, is a widely-used approach to software versioning that aims to provide a clear and concise way of communicating the changes that have been made to a software program. In semantic versioning, versions are represented by a three-part number, with the format `major`.`minor`.`patch`.
+
+The `major` version number is incremented when there are significant changes or breaking changes to the software. The `minor` version number is incremented when new features are added to the software, but the changes are backward-compatible. The `patch` version number is incremented when bug fixes or other small changes are made to the software.
+
+Semantic versioning is based on the idea that different types of changes should be indicated by different parts of the version number. This allows developers to communicate clearly about the changes that have been made to the software and helps users understand whether they need to upgrade to a newer version.
+
+SemVer is managed by the Semantic Versioning organization, which maintains the official specification for semantic versioning. You can learn more about SemVer and the Semantic Versioning organization at [https://semver.org/](https://semver.org/).
+
 
 **[back to top](#table-of-contents)**
 
