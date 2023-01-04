@@ -4,6 +4,11 @@ module.exports = {
         "footer-leading-blank": [1, "always"],
         "header-max-length": [2, "always", 100],
         "scope-case": [2, "always", "lower-case"],
+        "scope-enum": [
+            2,
+            "always",
+            ["git", "version", "license", "tests", "cicd", "metrics", "deployment", "documentation", "general"]
+        ],
         "subject-case": [
             2,
             "never",
