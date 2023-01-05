@@ -19,11 +19,6 @@ This section describes how we develop software at NanoGiants
     - [Configuration of bots / checks](#configuration-of-bots--checks)
     - [Reviewing and Merging](#reviewing-and-merging)
     - [Best practises by NanoGiants teams](#best-practises-by-nanogiants-teams)
-  - [Versioning](#versioning)
-  - [Licensing](#licensing)
-  - [Documentation](#documentation)
-  - [Guiding Principles](#guiding-principles)
-  - [CI/CD](#cicd)
   - [Quality Metrics (SonarCloud)](#quality-metrics-sonarcloud)
 
 
@@ -140,16 +135,28 @@ a valid reason for it (i.e. many WiP commits). Even then let this be the excepti
 - [Moshpit Team](bestPractises/pullRequest-moshpit.md)
 - [Start11 Team](bestPractises/pullRequest-start11.md)
 
-## Versioning
-
-## Licensing
-
-## Documentation
-
-## Guiding Principles
-
-## CI/CD
-
 ## Quality Metrics (SonarCloud)
+
+Software metrics are quantifiable measures of the properties or characteristics of a software system. They are used to evaluate the quality, performance, reliability, and other aspects of a software system. Static code analysis is a technique for analyzing the source code of a software system without executing the code and can be used to measure certain software metrics. It involves using tools that scan the source code and look for issues such as bugs, security vulnerabilities, and code quality issues. At NanoGiants we use [SonarCloud](https://sonarcloud.io). SonarCloud performs static code analysis to identify issues such as bugs, security vulnerabilities, and code quality issues. It also provides code coverage information and can help teams track their progress towards meeting quality goals. The following metrics are tracked by SonarCloud:
+
+* Bugs: The number of bugs or defects identified in the code. It is measured by `Reliability`
+* Vulnerabilities: The number of security vulnerabilities identified in the code. Is is measured by `Security`
+* Code smells: Code smells are indications of problems or areas for improvement in the codebase. SonarCloud tracks the number of code smells identified in the code.
+* Hotspots reviewed: The ratio of hotspots that are reviewed. Hotspots are areas of the code that are more likely to contain issues or areas for improvement
+* Code coverage: The percentage of the codebase that is covered by tests.
+* Duplications: The number of lines of code that are duplicated within the codebase.
+
+Measurements such as `Reliability`, `Security` and `Maintainablity` are divided into classes namely `A` (best), `B`, `C`, `D`, `E` (worst). One can defined when a certain measurement is classified as one of the mentioned classes within the Sonarcloud settings.
+
+Quality gates are defined by setting thresholds on metrics. For example, a quality gate might require that the codebase have a certain code coverage percentage, a certain number of issues, or a certain test success rate. If the project meets the conditions of the quality gate, it is considered to be of sufficient quality. If it does not meet the conditions, it is considered to be insufficiently tested or of poor quality. See https://sonarcloud.io/organizations/nanogiants/quality_gates/show/9 for an overview of our current quality gates. This is the default quality gate, that has the following criteria in order to pass:
+
+* `Coverage` > 80.0%
+* `Duplicated Lines` < 3.0%
+* `Maintainability` Rating is `A`
+* `Reliability` Rating is `A`
+* `Security Hotspots reviewed` = 100%
+* `Security` Rating is `A`
+
+If a quality gates is not met we consider this project as failed and therefore not ready to be shiped to production. We have a Github bot in place that triggers a check on sonarcloud and fetches relevant information, when a pull request is created to ensure that we are aware of the quality evaluation at any given time.
 
 **[back to top](#table-of-contents)**
