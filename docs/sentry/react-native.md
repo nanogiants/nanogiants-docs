@@ -11,15 +11,14 @@ npm i @sentry/react-native
 yarn add @sentry/react-native
 ```
 
-Run the Sentry wizard to automatically patch native files.
+Run the Sentry wizard to automatically patch native files. (Hint: The wizard doesn't support React Native versions 0.68 and older)  
 Remember to work on a clean workspace and commit current changes. So in case of failure you don't mess up your code.
 ```bash
 npx @sentry/wizard@latest -s -i reactNative
 ```
 
 The wizard creates two sentry.properties files. One in the android and one in the ios native directories.  
-Add `sentry.properties` to `.gitignore` as it contains the secret access token
-For your CI you can copy the contents of this file as base64 and add it as a secret in your workflow
+Add `sentry.properties` to `.gitignore` as it contains the secret access token for your CI you can copy the contents of this file as base64 and add it as a secret in your workflow
 ```bash
 # This copies the file to your clipboard
 cat ios/sentry.properties | openssl base64 | tr -d '\n' | pbcopy
