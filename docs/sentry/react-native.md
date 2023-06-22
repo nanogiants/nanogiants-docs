@@ -33,7 +33,7 @@ In your CI you can use something lile this to recreate the file
 ```
 
 For monorepos or when your react-native application is not present in your repository root you have to make a slight change to your ios `project.pbxproj` file.  
-Searth for the `Bundle React Native code and images` task and add `export PROJECT_ROOT=".."` to the top of the shellScript command. Right before the `export SENTRY_PROPERTIES...`
+Search for the `Bundle React Native code and images` task and add `export PROJECT_ROOT=".."` to the top of the shellScript command. Right before the `export SENTRY_PROPERTIES...`
 
 
 ### Setting up the SDK
