@@ -263,4 +263,4 @@ This can be done with the following:
     ...
 ```
 
-Keep in mind to adjust the `--dist` target according to your current build environment and add the secrets to your git repository.
+Keep in mind to adjust the `--dist` target according to your current build environment and add the secrets to your git repository. The `dist` and `version` **must** match the values in the `Sentry.init` call
