@@ -24,7 +24,7 @@ Add `sentry.properties` to `.gitignore` as it contains the secret access token f
 cat ios/sentry.properties | openssl base64 | tr -d '\n' | pbcopy
 ```
 Add the base64 string as a secret to your github repository like `SENTRY_PROPERTIES_FILE_BASE64` with the content of your clipboard  
-In your CI you can use something lile this to recreate the file
+In your CI you can use something like this to recreate the file
 ```yaml
 - name: Add sentry.properties files
   run: |
