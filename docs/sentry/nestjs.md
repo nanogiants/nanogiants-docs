@@ -239,10 +239,13 @@ This can be done with the following:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js 14
+      - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 18
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
       - name: install deps
         run: npm i
       - name: build
