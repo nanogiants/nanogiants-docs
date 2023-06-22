@@ -8,7 +8,7 @@ By capturing and analyzing errors, exceptions, and crashes, Sentry provides valu
 
 ### What do we track
 As the first iteration of implementing Sentry in our products we only track crashes and no further tracing.
-Crashed can be handled (like in try/catch) and unhandled (like complete server crash).
+Crashes can be handled (like in try/catch) and unhandled (like complete server crash).
 
 ### What are sourcemaps?
 Source maps in TypeScript are files that provide a mapping between the generated JavaScript code and the original TypeScript code. When TypeScript code is compiled into JavaScript for deployment, source maps allow developers to debug and trace issues in the original TypeScript source code rather than the generated JavaScript code. They enable the browser's developer tools to display and link errors, breakpoints, and console logs back to the corresponding lines and files in the TypeScript source code, making it easier to identify and fix bugs during development. Sentry needs sourcemaps to point to the correct stacktraces when an error is captured.
