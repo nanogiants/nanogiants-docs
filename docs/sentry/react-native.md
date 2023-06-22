@@ -55,9 +55,9 @@ You don't need to make your dsn string a secret.
 
 > **Important:** Do NOT add `release` or `dist` to your Sentry.init config.
 
-Sentry automatically does this for you in the following pattern:
-`release=bundleId@bundleVersion+BuildNumber` - for example: `com.nanogiants.appname.develop@1.0.0+1`
-`dist=BuildNumber` - for example: `1`
+Sentry automatically does this for you in the following pattern:  
+`release=bundleId@bundleVersion+BuildNumber` - for example: `com.nanogiants.appname.develop@1.0.0+1`  
+`dist=BuildNumber` - for example: `1`  
 This needs to stay on the defaults because the sourcemap generation in the build process also uploads the artifacts with these parameters. If you rename one of them the stacktraces in the sentry.io dashboard will not resolve correctly.
 This way all of your environment builds can have separate sourcemaps on sentry.io
 
