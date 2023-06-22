@@ -44,6 +44,7 @@ First you need to initialize the SDK like so:
 ```ts
 // you could write a wrapperservice like a trackingservice which handles this for you.
 Sentry.init({
+  // you don't need to make your dsn string a secret.
   dsn: 'your_dsn_string',
   tracesSampleRate: 1.0,
   environment: ENVIRONMENT,
@@ -51,7 +52,6 @@ Sentry.init({
   enabled: true
 });
 ```
-You don't need to make your dsn string a secret.
 
 > **Important:** Do NOT add `release` or `dist` to your Sentry.init config.
 
