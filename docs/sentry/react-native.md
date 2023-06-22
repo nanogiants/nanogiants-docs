@@ -12,7 +12,7 @@ yarn add @sentry/react-native
 ```
 
 Run the Sentry wizard to automatically patch native files. (Hint: The wizard doesn't support React Native versions 0.68 and older)  
-Remember to work on a clean workspace and commit current changes. So in case of failure you don't mess up your code.
+**Remember to work on a clean workspace and commit current changes. So in case of failure you don't mess up your code.**
 ```bash
 npx @sentry/wizard@latest -s -i reactNative
 ```
