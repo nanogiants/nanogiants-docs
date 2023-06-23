@@ -18,7 +18,8 @@ npx @sentry/wizard@latest -s -i reactNative
 ```
 
 The wizard creates two sentry.properties files. One in the android and one in the ios native directories.  
-Add `sentry.properties` to `.gitignore` as it contains the secret access token for your CI you can copy the contents of this file as base64 and add it as a secret in your workflow
+Add `sentry.properties` to `.gitignore` as it contains the secret access token for your CI.  
+You can copy the contents of this file as base64 and add it as a secret in your workflow.
 ```bash
 # This copies the file to your clipboard
 cat ios/sentry.properties | openssl base64 | tr -d '\n' | pbcopy
