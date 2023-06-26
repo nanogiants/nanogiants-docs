@@ -79,3 +79,61 @@ const someTaskThatCouldFail = () => {
 }
 ```
 
+### Enabling and disabling Sentry Sdk
+The user has always the choice to not track anything.  
+Lets see the following sample TrackingService class:
+```ts
+import * as Sentry from '@sentry/react-native';
+
+class TrackingServiceClass {
+  public log(message: string) {
+    Sentry.captureMessage(message, 'log');
+  }
+
+  public error(error: unknown) {
+    Sentry.captureException(error);
+  }
+
+  public async setTrackingEnabled(enabled: boolean) {
+    if (enabled) {
+      this.initSentry();
+    } else {
+      await Sentry.close();
+    }
+  }
+
+  private initSentry() {
+    Sentry.init({
+      dsn: 'your_dsn_string',
+      environment: process.env.NODE_ENV,
+    });
+  }
+}
+
+export const TrackingService = new TrackingServiceClass();
+```
+
+By default Sentry is **NOT** enabled or initialized.  
+As this class acts as a singleton you need to handle the initialization in your entrypoint of the app, like in the `main.ts` file. Where you have your stored settings like the user preferences available.
+
+```tsx
+export const App = () => {
+  const [initialized, setInitialized] = useState(false)
+  const user = useSomeStore((s) => s.user);
+
+  const handleTracking = async () => {
+    await TrackingService.setTrackingEnabled(user.tracking.enabled)
+    setInitialized(true)
+  }
+
+  useEffect(() => {
+    handleTracking()
+  }, [])
+
+
+  return initialized ? <Text>Hellow World!</Text> : <Text>Loading...</Text>
+}
+
+```
+
+
