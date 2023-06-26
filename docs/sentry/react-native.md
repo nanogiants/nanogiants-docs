@@ -19,18 +19,15 @@ npx @sentry/wizard@latest -s -i reactNative
 
 The wizard creates two sentry.properties files. One in the android and one in the ios native directories.  
 Add `sentry.properties` to `.gitignore` as it contains the secret access token for your CI.  
-You can copy the contents of this file as base64 and add it as a secret in your workflow.
-```bash
-# This copies the file to your clipboard
-cat ios/sentry.properties | openssl base64 | tr -d '\n' | pbcopy
-```
-Add the base64 string as a secret to your github repository like `SENTRY_PROPERTIES_FILE_BASE64` with the content of your clipboard  
+Remember to add this file in 1Password.  
+You can copy the contents of this file and add it as a secret in your workflow.
+Add the file content as a secret to your github repository like `SENTRY_PROPERTIES_FILE_CONTENTS`.  
 In your CI you can use something like this to recreate the file
 ```yaml
 - name: Add sentry.properties files
   run: |
-    echo "$SENTRY_PROPERTIES_FILE_BASE64" | base64 --decode > ios/sentry.properties
-    echo "$SENTRY_PROPERTIES_FILE_BASE64" | base64 --decode > android/sentry.properties
+    echo "$SENTRY_PROPERTIES_FILE_CONTENTS" > ios/sentry.properties
+    echo "$SENTRY_PROPERTIES_FILE_CONTENTS" > android/sentry.properties
 ```
 
 For monorepos or when your react-native application is not present in your repository root you have to make a slight change to your ios `project.pbxproj` file.  
