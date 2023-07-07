@@ -22,7 +22,6 @@ Add the following to your tsconfig
 ### Setting up the SDK
 You need to create some Filters and Modules to have automatic capturing enabled. Create the following files:
 
-
 ---
 `src/SentryExceptionFilter.ts`
 ```ts
@@ -228,7 +227,7 @@ export class AppModule {
 }
 ```
 
-This sould be all to capture errors automatically.
+This should be all to capture errors automatically. Here is a gist that contains the relevant files needed for implementation. Use them as starting point and adjust as needed: https://gist.github.com/nanogiantsgmbh/838fc2e724b328b15502b8b4d0f6b365
 
 ### Handling source maps
 To get correct stacktraces on sentry.io you need to upload sourcemaps in your CI pipeline.
