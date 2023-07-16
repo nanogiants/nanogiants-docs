@@ -7,9 +7,9 @@ The Developer Certiciate and Provisioning Profile are required for code signing 
 
 [Apple Developer Portal](https://developer.apple.com/account/resources/)
 
-1. Load the NanoGiants GmbH Developer Certificate, and add it into your Keychain.
-2. add identifiers for the different environments.
-3. add provisioning profiles for the different environments.
+1. Load the NanoGiants GmbH iOS Distribution Certificate from our 1Password vault, and add it to your Keychain.
+2. Add identifiers for the different environments.
+3. Add provisioning profiles for the different environments.
 
 ## Xcode
 ### Create an empty base project in Xcode.
@@ -21,20 +21,20 @@ Configure signing & capabilities for different environments.
 4. Production
    
 ### Configure analytics, crash reporting, and static file analysis tools.
-
 1. Integrate Sentry for error tracking.
 2. Use SonarCloud for code quality analysis.
-3. Configure Android Lint for static code analysis.
-4. Set up Detekt for Kotlin code analysis.
+3. Use Danger for code review automation.
+4. Integrate SwiftLint for code style enforcement.
+5. Integrate SwiftGen for code generation.  
+**TODO**: Add detailed descriptions for each step.
 
 ## CI/CD
-
 ### AppCenter
 1. Log into AppCenter account and create a new project  
-**Make sure that you create the project under the NanoGiants GmbH group**
-
+**Make sure that you create the project under the NanoGiants GmbH group!**
 2. Configure the necessary build and distribution settings in AppCenter.
-3. Set up distribution group for iOS and add the collaborators group.
+3. Set up distribution group for iOS and add the collaborator group.
+4. Invite relevante people if not already in collaborator group.
 
 **Naming:**  
 Project: `"PROJECT-App-BUILDTYPE"` (e.g. NanoGiants-App-Develop)  
