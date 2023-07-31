@@ -2,6 +2,8 @@
 This document describes best practices when dealing with pull requests, that were learned within the Appengers team.
 
 ## Creation of the pull request
+[PR Template](./pullRequest-appengers-template.md)
+
 ### Name
 Set the git commit message as the name of the pull request. When merging this is the suggested name for the commit message, which lets you easily confirm the PR instead of setting a proper git commit message. 
 
