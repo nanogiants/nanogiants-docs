@@ -13,6 +13,14 @@ This section describes how we develop software at NanoGiants
   - [Git commit messages?](#git-commit-messages)
     - [What is our git philosophy?](#what-is-our-git-philosophy)
     - [Tooling](#tooling)
+  - [Pull Requests](#pull-requests)
+    - [Creation of the pull request](#creation-of-the-pull-request)
+    - [Basic configuration](#basic-configuration)
+    - [Configuration of bots / checks](#configuration-of-bots--checks)
+    - [Reviewing and Merging](#reviewing-and-merging)
+    - [Best practises by NanoGiants teams](#best-practises-by-nanogiants-teams)
+  - [Quality Metrics (SonarCloud)](#quality-metrics-sonarcloud)
+
 
 <!-- section: Content -->
 <!-- This the actual content. -->
@@ -27,15 +35,15 @@ The syntax is as follows:
 
 The `<type>` denotes the type of the changes that are applied to the code when the commit was introduced. The following types are allowed:
 
-| Name | Description |
-| :--- | :---------- |
-| `feat` | A new feature visible to the user |
-| `fix` | A fix of a behavior that is not a new feature (i.e. bug) | 
-| `docs` | Changes to documentation or anything related to documentation |
-| `style` | Changes that do not affect the meaning of the code (i.e. remove whitespaces, formatting). This does not include changes to css styles |
-| `refactor` | Changes to code that do not fix bugs or add features |
-| `test` | Changes to test files or anything related to tests |
-| `chore` | Anything else that does not fall into one of the other categories |
+| Name       | Description                                                                                                                           |
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `feat`     | A new feature visible to the user                                                                                                     |
+| `fix`      | A fix of a behavior that is not a new feature (i.e. bug)                                                                              |
+| `docs`     | Changes to documentation or anything related to documentation                                                                         |
+| `style`    | Changes that do not affect the meaning of the code (i.e. remove whitespaces, formatting). This does not include changes to css styles |
+| `refactor` | Changes to code that do not fix bugs or add features                                                                                  |
+| `test`     | Changes to test files or anything related to tests                                                                                    |
+| `chore`    | Anything else that does not fall into one of the other categories                                                                     |
 
 The `[optional scope]` is optional and describes that section or area where this commit applies to. We give examples later in this document. And finally `<description>` is the actual description of the commit.
 
@@ -75,5 +83,80 @@ squash WIP commits to summarize them as a feature.
 
 ### Tooling
 We use [commitlint](https://github.com/conventional-changelog/commitlint) in combination with [husky](https://github.com/typicode/husky) to ensure that commit messages are consistent with our guidelines. Obviously this only applies to structure and not semantics. You can find a config file here that holds the configuration for our guide [here](../files/development/git/commitlint.config.js).
+
+**[back to top](#table-of-contents)**
+
+## Pull Requests
+Pull requests are a fundamental element to ensure quality of code especially for larger teams as well as larger projects. 
+The idea is that every pull request is reviewed by another person before eventually merging it into the base branch (i.e. 
+`develop`, `master`). The reviewer may give feedback and is able to request changes, so that the developer that
+created the pull request incorporates the changes suggested by the reviewer (or argues against them). We at NanoGiants
+also work with pull requests (on Github). The workflow consists of 4 simple steps, that are described later in this 
+document. We want to emphasize that every team of the NanoGiants has to adhere to the basic structure (i.e. 4 simple steps).
+However, teams are free to choose how they want to do it in regards to the details. We also want to provide best practises
+that are maintained by the respective teams, so that you have a set of rules that you might want to follow, when building 
+a new team pro project. 
+
+### Creation of the pull request
+Pull requests can be easily created and this section does not cover on how to do this on Github. We just want to give
+some restrictions what the outcome of this step is. When creating a pull request you have to provide a name as well as 
+a description. Both are mandatory (not by Github but by us). 
+
+| Name        | Description                         | Must                                                | Should                                                                                         | Could                         |
+| :---------- | :---------------------------------- | :-------------------------------------------------- | :--------------------------------------------------------------------------------------------- | :---------------------------- |
+| Name        | The name of the pull request        | Describe what the PR does                           | -                                                                                              | Reference to an issue in Jira |
+| Description | The description of the pull request | Describe what the PR does in a more detailed manner | Hold relevant information (i.e. what was tested, Definition of Done, link to Jira issue, ... ) | -                             |
+
+### Basic configuration
+Here are many options available. See [best practises](#best-practises-by-nanogiants-teams) to get some ideas what you may
+configure. There is only one thing every team has to adhere to and this is the reviewers section. Every pull request has 
+to be reviewed by at least one other person to ensure quality of code. Therefore suggest at least one reviewer. Also every
+repository has to be configured in a way that merging is blocked (even for administrators) when there were no reviews.
+
+### Configuration of bots / checks
+Usage of bots is a great help for pull requests as they run checks that you had to yourself (i.e. runnings tests, linting).
+You have to use the sonarcloud bot that, sends changes introduced by the commit to sonarcloud.io in order to run some checks.
+This means that there has to be a sonarcloud project. For information on how to create this refer to the respective section.
+Other useful bots are Danger for Swift projects or the Travis CI Bot. See [best practises](#best-practises-by-nanogiants-teams) to got some ideas what you may configure.
+
+### Reviewing and Merging
+Reviewing a pull request is no easy task especially with bigger pull requests. So take your time and be as extensive and 
+specific as you see fit. The goal is not to bash / blame another developer but to ensure that code adheres to a certain 
+standard of quality. For some pull requests it is a good idea to checkout the relevant branch and run it locally as some 
+changes may be open to race conditions are behave differently on different environments. It is better to see this at a
+reviewing stage instead on a production environment. When merging a PR do not opt for the squash option unless there is 
+a valid reason for it (i.e. many WiP commits). Even then let this be the exception and not be the rule.
+
+
+### Best practises by NanoGiants teams
+
+- [Amprio (former We1U Team)](bestPractises/pullRequest-amprio.md)
+- [Proxima Team](bestPractises/pullRequest-proxima.md)
+- [Moshpit Team](bestPractises/pullRequest-moshpit.md)
+- [Start11 Team](bestPractises/pullRequest-start11.md)
+
+## Quality Metrics (SonarCloud)
+
+Software metrics are quantifiable measures of the properties or characteristics of a software system. They are used to evaluate the quality, performance, reliability, and other aspects of a software system. Static code analysis is a technique for analyzing the source code of a software system without executing the code and can be used to measure certain software metrics. It involves using tools that scan the source code and look for issues such as bugs, security vulnerabilities, and code quality issues. At NanoGiants we use [SonarCloud](https://sonarcloud.io). SonarCloud performs static code analysis to identify issues such as bugs, security vulnerabilities, and code quality issues. It also provides code coverage information and can help teams track their progress towards meeting quality goals. The following metrics are tracked by SonarCloud:
+
+* Bugs: The number of bugs or defects identified in the code. It is measured by `Reliability`
+* Vulnerabilities: The number of security vulnerabilities identified in the code. Is is measured by `Security`
+* Code smells: Code smells are indications of problems or areas for improvement in the codebase. SonarCloud tracks the number of code smells identified in the code.
+* Hotspots reviewed: The ratio of hotspots that are reviewed. Hotspots are areas of the code that are more likely to contain issues or areas for improvement
+* Code coverage: The percentage of the codebase that is covered by tests.
+* Duplications: The number of lines of code that are duplicated within the codebase.
+
+Measurements such as `Reliability`, `Security` and `Maintainablity` are divided into classes namely `A` (best), `B`, `C`, `D`, `E` (worst). One can defined when a certain measurement is classified as one of the mentioned classes within the Sonarcloud settings.
+
+Quality gates are defined by setting thresholds on metrics. For example, a quality gate might require that the codebase have a certain code coverage percentage, a certain number of issues, or a certain test success rate. If the project meets the conditions of the quality gate, it is considered to be of sufficient quality. If it does not meet the conditions, it is considered to be insufficiently tested or of poor quality. See https://sonarcloud.io/organizations/nanogiants/quality_gates/show/9 for an overview of our current quality gates. This is the default quality gate, that has the following criteria in order to pass:
+
+* `Coverage` > 80.0%
+* `Duplicated Lines` < 3.0%
+* `Maintainability` Rating is `A`
+* `Reliability` Rating is `A`
+* `Security Hotspots reviewed` = 100%
+* `Security` Rating is `A`
+
+If a quality gates is not met we consider this project as failed and therefore not ready to be shiped to production. We have a Github bot in place that triggers a check on sonarcloud and fetches relevant information, when a pull request is created to ensure that we are aware of the quality evaluation at any given time.
 
 **[back to top](#table-of-contents)**

@@ -1,0 +1,30 @@
+{
+  "name": "nanogiants-docs",
+  "version": "1.0.0",
+  "description": "This is the nanogiants software development doc. It describes how we develop software",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "postinstall": "npx husky install && npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nanogiants/nanogiants-docs.git"
+  },
+  "keywords": [
+    "nanogiants",
+    "docs"
+  ],
+  "author": "Stefan Neidig <s.neidig@nanogiants.de> (https://nanogiants.de/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nanogiants/nanogiants-docs/issues"
+  },
+  "homepage": "https://github.com/nanogiants/nanogiants-docs#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.0",
+    "@commitlint/config-conventional": "^17.4.0",
+    "husky": "^8.0.3"
+  }
+}
