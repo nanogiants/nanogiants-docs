@@ -42,8 +42,9 @@ To securely store secrets required by GitHub Actions or workflows, these should 
 ### 3.1 Adding Secrets in GitHub
 
 - Navigate to the desired repository on GitHub.
-- Click on "Settings" and select "Secrets" from the menu.
-- Click on "New repository secret" and enter the name and value of the secret.
+- Click on "Settings" and select "Secrets and variables" from the menu.
+- Click on "Codespaces".
+- At the top of the page, click "New repository secret".
 - Save the secret.
 
 ### 3.2 Using Secrets in Workflows
