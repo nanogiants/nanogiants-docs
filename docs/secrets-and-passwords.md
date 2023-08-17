@@ -74,11 +74,6 @@ jobs:
 When creating secrets and passwords, using strong, random character strings is crucial. Adequate password complexity ensures that unauthorized access due to weak passwords is avoided. The following recommendations apply:
 
 - All passwords should have a minimum length of 16 characters to provide a high level of security.
-
-### 4.2 Password Complexity
-
-Passwords must be composed with the utmost technical complexity to prevent unauthorized access. Hence, passwords should include the following elements:
-
 - Upper and lower case letters
 - Numbers
 - Special characters (e.g., !, ?, +, #, %, etc.)
