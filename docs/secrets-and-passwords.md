@@ -1,47 +1,59 @@
-# Projekt-Secrets und Passwort-Verwaltung
+**Project Secrets and Password Management**
 
-_Eine Dokumentation zur sicheren Verwaltung von Secrets und Passwörtern in Projekten_
-
----
-
-**Inhaltsverzeichnis**
-
-1. Einleitung
-2. 1Password Vault für Secrets und Passwörter
-3. Verwaltung von Secrets in GitHub
-   - 3.1 Hinzufügen von Secrets in GitHub
-   - 3.2 Verwendung von Secrets in Workflows
-4. Best Practices für Sicherheit
-   - 4.1 Verwendung starker Passwörter
-   - 4.2 Passwortkomplexität
-5. Fazit
+_A documentation on secure management of secrets and passwords in projects_
 
 ---
 
-## 1. Einleitung
+**Table of Contents**
 
-Die Sicherheit von Secrets und Passwörtern in einem Projekt ist von entscheidender Bedeutung, um sensible Informationen vor unautorisierten Zugriffen zu schützen. Diese Dokumentation beschreibt bewährte Methoden zur Verwaltung von Secrets und Passwörtern in einem Projektumfeld unter Verwendung von 1Password und GitHub.
+1. Introduction
+2. 1Password Vault for Secrets and Passwords
+   - 2.1 Naming Conventions
+3. Managing Secrets in GitHub
+   - 3.1 Adding Secrets in GitHub
+   - 3.2 Using Secrets in Workflows
+4. Best Practices for Security
+   - 4.1 Use of Strong Passwords
+   - 4.2 Password Complexity
+5. Conclusion
 
-## 2. 1Password Vault für Secrets und Passwörter
+---
 
-Alle Secrets und Passwörter eines Projekts müssen in 1Password verwaltet werden. Ein dedizierter Vault für jedes Projekt innerhalb von 1Password ermöglicht eine organisierte und zentrale Ablage der sensiblen Informationen. Zugriff auf diesen Vault sollte auf eine begrenzte Anzahl von vertrauenswürdigen Personen beschränkt sein, ganz getreu dem Motto "So viele wie nötig, so wenige wie möglich". Die Verwendung von 1Password stellt sicher, dass die Daten verschlüsselt und geschützt sind.
+## 1. Introduction
 
-## 3. Verwaltung von Secrets in GitHub
+Ensuring the security of secrets and passwords in a project is of paramount importance to safeguard sensitive information from unauthorized access. This documentation outlines best practices for managing secrets and passwords in a project environment using 1Password and GitHub.
 
-Um Secrets, die von GitHub Actions oder Workflows benötigt werden, sicher zu speichern, sollten diese in den GitHub Repository-Einstellungen hinterlegt werden.
+## 2. 1Password Vault for Secrets and Passwords
 
-### 3.1 Hinzufügen von Secrets in GitHub
+All secrets and passwords of a project must be managed within 1Password. A dedicated vault for each project within 1Password facilitates organized and centralized storage of sensitive information. Access to this vault should be limited to a trusted few, adhering to the principle of "as many as necessary, as few as possible." The use of 1Password ensures that data is encrypted and protected.
 
-- Navigieren Sie zum gewünschten Repository auf GitHub.
-- Klicken Sie auf "Settings" und wählen Sie "Secrets" im Menü.
-- Klicken Sie auf "New repository secret" und geben Sie den Namen und den Wert des Secrets ein.
-- Speichern Sie das Secret.
+### 2.1 Naming Conventions:
 
-### 3.2 Verwendung von Secrets in Workflows
+To maintain consistency and clarity, we suggest to use the following naming convention for our project vaults: `client-project`. Here's what it means:
 
-In GitHub Actions oder Workflows können die definierten Secrets verwendet werden, um sensible Informationen sicher zu übergeben. Secrets werden als Umgebungsvariablen in den Workflows verwendet, um den Zugriff auf diese Informationen während der Ausführung zu ermöglichen.
+- `client`: The name of the client or the main entity associated with the project. (e.g. `haufe`)
+- `project`: The name or identifier of the project itself. (e.g. `powerhelferapp`)
 
-Beispiel für die Verwendung eines Secrets in einem Workflow:
+Using this naming convention, we can easily identify which project a vault is associated with.
+
+## 3. Managing Secrets in GitHub
+
+To securely store secrets required by GitHub Actions or workflows, these should be stored in the GitHub repository settings.
+
+### 3.1 Adding Secrets in GitHub
+
+- Navigate to the desired repository on GitHub.
+- Click on "Settings" and select "Secrets" from the menu.
+- Click on "New repository secret" and enter the name and value of the secret.
+- Save the secret.
+
+### 3.2 Using Secrets in Workflows
+
+In GitHub Actions or workflows, the defined secrets can be used to securely pass sensitive information. Secrets are utilized as environment variables in workflows to grant access to this information during execution.
+
+For more information see: https://docs.github.com/en/actions/security-guides/encrypted-secrets
+
+Example of using a secret in a workflow:
 
 ```yaml
 jobs:
@@ -55,24 +67,24 @@ jobs:
         run: echo ${{ secrets.API_KEY }}
 ```
 
-## 4. Best Practices für Sicherheit
+## 4. Best Practices for Security
 
-### 4.1 Verwendung starker Passwörter
+### 4.1 Use of Strong Passwords
 
-Beim Erstellen von Secrets und Passwörtern ist die Verwendung von starken, zufälligen Zeichenfolgen entscheidend. Eine angemessene Passwortkomplexität gewährleistet, dass unbefugte Zugriffe aufgrund schwacher Passwörter vermieden werden. Hierbei gelten folgende Empfehlungen:
+When creating secrets and passwords, using strong, random character strings is crucial. Adequate password complexity ensures that unauthorized access due to weak passwords is avoided. The following recommendations apply:
 
-- Alle Passwörter sollten eine Mindestzeichenlänge von 16 Zeichen aufweisen, um ein hohes Maß an Sicherheit zu bieten.
+- All passwords should have a minimum length of 16 characters to provide a high level of security.
 
-### 4.2 Passwortkomplexität
+### 4.2 Password Complexity
 
-Die Passwörter müssen technisch so komplex wie möglich zusammengesetzt sein, um unerlaubten Zugriff zu verhindern. Daher sollten die Passwörter folgende Elemente enthalten:
+Passwords must be composed with the utmost technical complexity to prevent unauthorized access. Hence, passwords should include the following elements:
 
-- Groß- und Kleinbuchstaben
-- Zahlen
-- Sonderzeichen (z.B. !, ?, +, #, % usw.)
+- Upper and lower case letters
+- Numbers
+- Special characters (e.g., !, ?, +, #, %, etc.)
 
-Durch die Kombination dieser Elemente wird die Passwortstärke erheblich gesteigert, wodurch das Risiko von Brute-Force- oder andere Angriffsarten reduziert wird.
+By combining these elements, password strength is significantly enhanced, reducing the risk of brute force or other attack methods.
 
-## 5. Fazit
+## 5. Conclusion
 
-Die sichere Verwaltung von Secrets und Passwörtern ist ein wesentlicher Aspekt jedes Projekts. Die Nutzung eines Passwort-Managers wie 1Password und die Integration von GitHub Secrets in Workflows tragen dazu bei, sensible Informationen zu schützen und die Sicherheit des Projekts zu gewährleisten.
+Secure management of secrets and passwords is a critical aspect of any project. The use of a password manager like 1Password and the integration of GitHub Secrets into workflows contribute to safeguarding sensitive information and ensuring project security. By adhering to these recommendations, the confidentiality and integrity of data are protected, minimizing potential security risks.
