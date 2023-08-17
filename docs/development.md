@@ -19,6 +19,7 @@ This section describes how we develop software at NanoGiants
     - [Configuration of bots / checks](#configuration-of-bots--checks)
     - [Reviewing and Merging](#reviewing-and-merging)
     - [Best practises by NanoGiants teams](#best-practises-by-nanogiants-teams)
+  - [Project Secrets and Password Management](#project-secrets-and-password-management)
   - [Versioning](#versioning)
   - [Licensing](#licensing)
   - [Documentation](#documentation)
@@ -139,6 +140,8 @@ a valid reason for it (i.e. many WiP commits). Even then let this be the excepti
 - [Proxima Team](bestPractises/pullRequest-proxima.md)
 - [Moshpit Team](bestPractises/pullRequest-moshpit.md)
 - [Start11 Team](bestPractises/pullRequest-start11.md)
+
+## [Project Secrets and Password Management](secrets-and-passwords.md)
 
 ## Versioning
 
