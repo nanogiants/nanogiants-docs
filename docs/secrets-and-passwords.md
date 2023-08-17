@@ -14,7 +14,6 @@ _A documentation on secure management of secrets and passwords in projects_
    - 3.2 Using Secrets in Workflows
 4. Best Practices for Security
    - 4.1 Use of Strong Passwords
-   - 4.2 Password Complexity
 5. Conclusion
 
 ---
