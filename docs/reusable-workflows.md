@@ -54,7 +54,3 @@ jobs:
 Now, every time you push changes to the `main` branch of your project repository, the `build.yml` workflow will be triggered. It will call the `basic-build.yml` reusable workflow from the central repository. This way, you've reused a standardized build process across different projects in our organization.
 
 For more information see: https://docs.github.com/en/actions/using-workflows/reusing-workflows#calling-a-reusable-workflow
-
-## Conclusion
-
-Using reusable workflows in GitHub allows our projects to benefit from consistent and efficient automation. The central workflow repository streamlines the maintenance and updating of workflows across our entire organization. By creating "Caller Workflow" files, you can seamlessly integrate these reusable workflows into your projects and reap the benefits of a shared approach.
