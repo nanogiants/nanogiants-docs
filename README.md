@@ -13,6 +13,7 @@ This repository contains all documentation about the NanoGiants tech stack and o
   - [Development](#development)
   - [Tech Stack](#tech-stack)
   - [Reusable Workflows Guide](#reusable-workflows-guide)
+  - [Project Secrets and Password Management](#project-secrets-and-password-management)
   - [Related work](#related-work)
   - [Contributing](#contributing)
   - [License](#license)
@@ -32,6 +33,11 @@ See [tech stack](docs/techstack.md)
 
 ## Reusable Workflows Guide
 See [Reusable Workflows Guide](docs/reusable-workflows.md)
+
+**[back to top](#table-of-contents)**
+
+## Project Secrets and Password Management
+See [Project Secrets and Password Management](docs/secrets-and-passwords.md)
 
 **[back to top](#table-of-contents)**
 
