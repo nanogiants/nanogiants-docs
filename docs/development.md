@@ -24,6 +24,12 @@ This section describes how we develop software at NanoGiants
   - [Documentation](#documentation)
   - [Guiding Principles](#guiding-principles)
   - [CI/CD](#cicd)
+  - [Error classes](#error-classes)
+    - [Class 1: Critical Errors](#class-1-critical-errors)
+    - [Class 2: Significant Errors](#class-2-significant-errors)
+    - [Class 3: Normal Errors](#class-3-normal-errors)
+    - [Class 4: Minor Errors](#class-4-minor-errors)
+    - [Bug Creation](#bug-creation)
   - [Quality Metrics (SonarCloud)](#quality-metrics-sonarcloud)
 
 
@@ -149,6 +155,46 @@ a valid reason for it (i.e. many WiP commits). Even then let this be the excepti
 ## Guiding Principles
 
 ## CI/CD
+
+## Error classes
+The purpose of using bug classes is to prioritize and manage bugs effectively. By classifying bugs, we can ensure that critical issues are addressed promptly, while less severe bugs are handled in a timely manner. This approach also helps in planning and resource allocation. 
+
+**[back to top](#table-of-contents)**
+
+### Class 1: Critical Errors
+Critical errors prevent the use of a CONTRACTUAL SERVICE or significant parts of it. The use is so impaired that immediate remedy is indispensable. A class 1 error also occurs when the IT system has security deficiencies that allow unauthorized persons to gain knowledge of personal data stored in the IT system. Critical and significant errors are addressed immediately and included in the current sprint. There must be a fix provided within 3 business days. All bugs are logged in Jira and tracked until resolution.
+
+**Examples**:
+- A mobile application crashes every time the app is launched
+- A mobile application crashes in a central feature every time
+- A backend, which is relevant for the use of a system, is not accessible and therefore the system is not usable
+- User data can be read via a freely available route (even if the route itself is obfuscated)
+- Sensitive logs (e.g., personal data, passwords) are displayed in the application, but these do not prevent the app from being used.
+
+### Class 2: Significant Errors
+Significant errors impair the use of a CONTRACTUAL SERVICE to such an extent that a reasonable use of the relevant CONTRACTUAL SERVICE is not or only possible with disproportionately great effort. Critical and significant errors are addressed immediately and included in the current sprint. There must be a fix provided within 3 business days. All bugs are logged in Jira and tracked until resolution.
+
+**Examples**:
+- When logging into a mobile app, passwords and sessions cannot be saved. Therefore, it is necessary to log in again at every startup
+- The response time of requests to a backend regularly take longer than 30 seconds
+
+### Class 3: Normal Errors
+Normal errors do not restrict the use of a CONTRACTUAL SERVICE. The bug is prioritized in various committees (e.g., refinements, plannings) and possibly planned and processed in the regular sprint cycle of the team. Normal and minor errors are prioritized and planned for future sprints. All bugs are logged in Jira and tracked until resolution.
+
+**Examples**:
+- Sorting of a list of items is random and does not correspond to a defined order (although this is provided).
+- A click path in the app is broken. However, there is another way to get to the desired screen
+- A notification banner can no longer be closed and thus covers clickable elements in the background. When restarting the app, this has disappeared.
+
+### Class 4: Minor Errors
+Minor errors have no significant impact on the functionality and usability of the CONTRACTUAL SERVICE. The use of the CONTRACTUAL SERVICE is not or only insignificantly restricted. A comparable function can be achieved through additional work steps. 
+
+**Examples**:
+- Padding of an element is chosen in such a way that it looks unaesthetic for the vast majority. However, it does not prevent the use of the app
+- Non-sensitive logs are displayed in the application, but they do not prevent the use of the app.
+
+### Bug Creation
+Bugs can be created manually by developers, scrum masters and product owners respectively or automatically by Sentry and Uptime Robot when a certain event occurs. When a bug is identified, it is logged in Jira with a detailed description, steps to reproduce, and any relevant screenshots or logs as well as their error class. The bug is then prioritized for resolution according to the documentation above.
 
 ## Quality Metrics (SonarCloud)
 
