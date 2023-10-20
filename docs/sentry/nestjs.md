@@ -158,7 +158,7 @@ Adjust your `app.module.ts` like so:
 
 ```ts
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
-import { RewriteFrames } from '@sentry/integrations';
+import { RewriteFrames, ExtraErrorData } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
 
 @Module({
