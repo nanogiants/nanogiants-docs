@@ -68,18 +68,16 @@ export class NgSentryInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       catchError(error => {
-        // capture the error, you can filter out some errors here
         Sentry.captureException(
           error,
-          this.sentryService.span.getTraceContext(),
+          this.sentryService.transaction.getTraceContext(),
         );
 
-        // throw again the error
         return throwError(() => error);
       }),
       finalize(() => {
         span.finish();
-        this.sentryService.span.finish();
+        this.sentryService.transaction.finish();
       }),
     );
   }
@@ -95,8 +93,6 @@ import * as Sentry from '@sentry/node';
 import { NgSentryInterceptor } from './ngsentry.interceptor';
 import { NgSentryService } from './ngsentry.service';
 
-export const SENTRY_OPTIONS = 'SENTRY_OPTIONS';
-
 @Module({})
 export class NgSentryModule {
   static forRoot(options: Sentry.NodeOptions) {
@@ -107,10 +103,6 @@ export class NgSentryModule {
       module: NgSentryModule,
       global: true,
       providers: [
-        {
-          provide: SENTRY_OPTIONS,
-          useValue: options,
-        },
         NgSentryService,
         {
           provide: APP_INTERCEPTOR,
@@ -129,7 +121,7 @@ import { Scope } from '@nestjs/common';
 import { Inject, Injectable } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
 import * as Sentry from '@sentry/node';
-import { Span, SpanContext } from '@sentry/types';
+import { Transaction, SpanContext } from '@sentry/types';
 import { Request } from 'express';
 
 /**
@@ -137,48 +129,27 @@ import { Request } from 'express';
  */
 @Injectable({ scope: Scope.REQUEST })
 export class NgSentryService {
-  /**
-   * Return the current span defined in the current Hub and Scope
-   */
-  get span(): Span {
-    return Sentry.getCurrentHub().getScope().getSpan();
-  }
+  transaction: Transaction;
 
-  /**
-   * When injecting the service it will create the main transaction
-   *
-   * @param request
-   */
   constructor(@Inject(REQUEST) private request: Request) {
-    console.log('construct');
-    const { method, headers, url } = this.request;
+    const { method, headers, url, body } = this.request;
 
-    // recreate transaction based from HTTP request
-    const transaction = Sentry.startTransaction({
+    // this transaction gets finished in the interceptor
+    // this class is only for having a service which can get used in other services to start and finish spans
+    this.transaction = Sentry.startTransaction({
       name: `Route: ${method} ${url}`,
       op: 'transaction',
     });
-
-    // setup context of newly created transaction
-    Sentry.getCurrentHub().configureScope(scope => {
-      scope.setSpan(transaction);
-
-      // customize your context here
-      scope.setContext('http', {
-        method,
-        url,
-        headers,
-      });
+    this.transaction.setContext('http', {
+      method,
+      url,
+      headers,
+      body,
     });
   }
 
-  /**
-   * This will simply start a new child span in the current span
-   *
-   * @param spanContext
-   */
   startChild(spanContext: SpanContext) {
-    return this.span.startChild(spanContext);
+    return this.transaction.startChild(spanContext);
   }
 }
 ```
@@ -189,7 +160,6 @@ Adjust your `app.module.ts` like so:
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { RewriteFrames } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
-import { version } from '../package.json';
 
 @Module({
   imports: [
@@ -198,11 +168,10 @@ import { version } from '../package.json';
       dsn: 'your_dsn_string',
       tracesSampleRate: 1.0,
       environment: process.env.NODE_ENV,
-      // version must match the version when uploading the source maps
-      release: version,
-      // dist must match the dist when uploading the source maps
+      release: process.env.npm_package_version,
       dist: process.env.NODE_ENV,
       integrations: [
+        new ExtraErrorData({ depth: 10 }),
         new RewriteFrames({
           iteratee: frame => {
             if (!frame.filename) return frame;
