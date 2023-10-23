@@ -13,13 +13,14 @@ This section describes how we develop software at NanoGiants
   - [Git commit messages?](#git-commit-messages)
     - [What is our git philosophy?](#what-is-our-git-philosophy)
     - [Tooling](#tooling)
+  - [Branching Model](#branching-model)
+  - [Versioning](#versioning)
   - [Pull Requests](#pull-requests)
     - [Creation of the pull request](#creation-of-the-pull-request)
     - [Basic configuration](#basic-configuration)
     - [Configuration of bots / checks](#configuration-of-bots--checks)
     - [Reviewing and Merging](#reviewing-and-merging)
     - [Best practises by NanoGiants teams](#best-practises-by-nanogiants-teams)
-  - [Versioning](#versioning)
   - [Licensing](#licensing)
   - [Documentation](#documentation)
   - [Guiding Principles](#guiding-principles)
@@ -31,7 +32,6 @@ This section describes how we develop software at NanoGiants
     - [Class 4: Minor Errors](#class-4-minor-errors)
     - [Bug Creation](#bug-creation)
   - [Quality Metrics (SonarCloud)](#quality-metrics-sonarcloud)
-
 
 <!-- section: Content -->
 <!-- This the actual content. -->
@@ -97,6 +97,40 @@ We use [commitlint](https://github.com/conventional-changelog/commitlint) in com
 
 **[back to top](#table-of-contents)**
 
+
+## Branching Model
+
+A branching model is a way of organizing and using branches in a version control system like Git. It specifies how developers should create, name, and merge branches. At NanoGiants we use [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow). It is designed to provide a clear separation between the different stages of the software development process and to make it easy for teams to collaborate on complex projects. The Gitflow model involves creating two main branches:
+
+* `master`: This branch represents the official release history of the project, and all changes that are merged into this branch are considered to be production-ready.
+* `develop`: This branch serves as the integration branch for all changes that are being developed.
+
+In addition to these two main branches, the Gitflow model involves creating additional branches for specific purposes:
+
+* `feature` branches: These branches are used to develop new features. When a feature is complete, it is merged back into the develop branch.
+* `release` branches: These branches are created from the develop branch when it is time to prepare for a new release. Release branches are used to finalize the features that will be included in the release and to fix any bugs that are discovered. When the release is ready, it is merged back into master and develop.
+* `hotfix` branches: These branches are used to quickly fix critical bugs in the production version of the software. Hotfix branches are created from the master branch, and when the fix is complete, it is merged back into both master and develop.
+
+![git flow branching model](../files/development/git/1492475213.png)
+
+The Gitflow command line interface (CLI) is a set of scripts that provide a high-level interface for working with Gitflow branches and releases. Using the Gitflow CLI can help streamline your workflow and make it easier to follow the Gitflow model consistently. It is available as part of the Git distribution and can be installed via package managers such as npm and Homebrew. More information can be found at https://github.com/nvie/gitflow.
+
+## Versioning
+
+Software versioning is the process of assigning unique names or numbers to different versions of a software program. It is a way of keeping track of the changes that have been made to the program over time and identifying which version of the software is the most current. Software versioning is important because it allows developers to communicate clearly about the state of the software, and it makes it easier for users to understand which version of the software they are using and whether they need to upgrade to a newer version. There are many different strategies for versioning software. We at NanoGiants rely on semantiv versioning.
+
+Semantic versioning, or SemVer for short, is a widely-used approach to software versioning that aims to provide a clear and concise way of communicating the changes that have been made to a software program. In semantic versioning, versions are represented by a three-part number, with the format `major`.`minor`.`patch`.
+
+The `major` version number is incremented when there are significant changes or breaking changes to the software. The `minor` version number is incremented when new features are added to the software, but the changes are backward-compatible. The `patch` version number is incremented when bug fixes or other small changes are made to the software.
+
+Semantic versioning is based on the idea that different types of changes should be indicated by different parts of the version number. This allows developers to communicate clearly about the changes that have been made to the software and helps users understand whether they need to upgrade to a newer version.
+
+SemVer is managed by the Semantic Versioning organization, which maintains the official specification for semantic versioning. You can learn more about SemVer and the Semantic Versioning organization at [https://semver.org/](https://semver.org/).
+
+For build version numbers that might occur in some software types (i.e. Android, iOS) we use sequential versioning, where versions are represented by a simple incrementing number (i.e. 1, 2, 3) .
+
+**[back to top](#table-of-contents)**
+
 ## Pull Requests
 Pull requests are a fundamental element to ensure quality of code especially for larger teams as well as larger projects. 
 The idea is that every pull request is reviewed by another person before eventually merging it into the base branch (i.e. 
@@ -144,17 +178,7 @@ a valid reason for it (i.e. many WiP commits). Even then let this be the excepti
 - [Amprio (former We1U Team)](bestPractises/pullRequest-amprio.md)
 - [Proxima Team](bestPractises/pullRequest-proxima.md)
 - [Moshpit Team](bestPractises/pullRequest-moshpit.md)
-- [Start11 Team](bestPractises/pullRequest-start11.md)
-
-## Versioning
-
-## Licensing
-
-## Documentation
-
-## Guiding Principles
-
-## CI/CD
+- [Appengers Team](bestPractises/pullRequest-appengers.md)
 
 ## Error classes
 The purpose of using bug classes is to prioritize and manage bugs effectively. By classifying bugs, we can ensure that critical issues are addressed promptly, while less severe bugs are handled in a timely manner. This approach also helps in planning and resource allocation. 
@@ -197,5 +221,27 @@ Minor errors have no significant impact on the functionality and usability of th
 Bugs can be created manually by developers, scrum masters and product owners respectively or automatically by Sentry and Uptime Robot when a certain event occurs. When a bug is identified, it is logged in Jira with a detailed description, steps to reproduce, and any relevant screenshots or logs as well as their error class. The bug is then prioritized for resolution according to the documentation above.
 
 ## Quality Metrics (SonarCloud)
+
+Software metrics are quantifiable measures of the properties or characteristics of a software system. They are used to evaluate the quality, performance, reliability, and other aspects of a software system. Static code analysis is a technique for analyzing the source code of a software system without executing the code and can be used to measure certain software metrics. It involves using tools that scan the source code and look for issues such as bugs, security vulnerabilities, and code quality issues. At NanoGiants we use [SonarCloud](https://sonarcloud.io). SonarCloud performs static code analysis to identify issues such as bugs, security vulnerabilities, and code quality issues. It also provides code coverage information and can help teams track their progress towards meeting quality goals. The following metrics are tracked by SonarCloud:
+
+* Bugs: The number of bugs or defects identified in the code. It is measured by `Reliability`
+* Vulnerabilities: The number of security vulnerabilities identified in the code. Is is measured by `Security`
+* Code smells: Code smells are indications of problems or areas for improvement in the codebase. SonarCloud tracks the number of code smells identified in the code.
+* Hotspots reviewed: The ratio of hotspots that are reviewed. Hotspots are areas of the code that are more likely to contain issues or areas for improvement
+* Code coverage: The percentage of the codebase that is covered by tests.
+* Duplications: The number of lines of code that are duplicated within the codebase.
+
+Measurements such as `Reliability`, `Security` and `Maintainablity` are divided into classes namely `A` (best), `B`, `C`, `D`, `E` (worst). One can defined when a certain measurement is classified as one of the mentioned classes within the Sonarcloud settings.
+
+Quality gates are defined by setting thresholds on metrics. For example, a quality gate might require that the codebase have a certain code coverage percentage, a certain number of issues, or a certain test success rate. If the project meets the conditions of the quality gate, it is considered to be of sufficient quality. If it does not meet the conditions, it is considered to be insufficiently tested or of poor quality. See https://sonarcloud.io/organizations/nanogiants/quality_gates/show/9 for an overview of our current quality gates. This is the default quality gate, that has the following criteria in order to pass:
+
+* `Coverage` > 80.0%
+* `Duplicated Lines` < 3.0%
+* `Maintainability` Rating is `A`
+* `Reliability` Rating is `A`
+* `Security Hotspots reviewed` = 100%
+* `Security` Rating is `A`
+
+If a quality gates is not met we consider this project as failed and therefore not ready to be shiped to production. We have a Github bot in place that triggers a check on sonarcloud and fetches relevant information, when a pull request is created to ensure that we are aware of the quality evaluation at any given time.
 
 **[back to top](#table-of-contents)**
