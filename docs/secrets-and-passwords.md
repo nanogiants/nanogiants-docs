@@ -128,6 +128,16 @@ By combining these elements, password strength is significantly enhanced, reduci
 
 See [NanoGiants Reusable Workflow: Load Dotenv from 1Password](https://github.com/nanogiants/nanogiants-reusable-actions/blob/master/docs/_load_dotenv_from_1password.md)
 
+### 5.3 Synchronizing your local .env File from 1Password Vault
+
+You can use the 1Password CLI along with a template file to effectively download the currently stored version of the .env file. Just place `{{ op://VAULT_NAME/NAME_OF_THE_SECRET/FILE_NAME }}` inside a template file ending in `.tpl`. You can than generate the actual env file via:
+
+```sh
+op inject -i FILE.tpl -o FILE
+```
+
+For example, you have a project vault named `nanogiants_docs` and store the `.env.develop` and `.env.staging` as a secret called `env_files`. Set up the `.env.staging.tpl` file with `{{ op://nanogiants_docs/env_files/.env.staging }}` as the content. Then run `op inject -i .env.staging.tpl -o .env.staging` to get a current version of the env file.
+
 ## 6. Conclusion
 
 Secure management of secrets and passwords is a critical aspect of any project. The use of a password manager like 1Password and the integration of there GitHub Actions into workflows contribute to safeguarding sensitive information and ensuring project security. By adhering to these recommendations, the confidentiality and integrity of data are protected, minimizing potential security risks.
