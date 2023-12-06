@@ -27,7 +27,7 @@ _A documentation on secure management of secrets and passwords in projects_
 
 ## 1. Introduction
 
-Ensuring the security of secrets and passwords in a project is of paramount importance to safeguard sensitive information from unauthorized access. This documentation outlines best practices for managing secrets and passwords in a project environment using 1Password and GitHub.
+Ensuring the security of secrets and passwords in a project is of paramount importance to safeguard sensitive information from unauthorized access. Our goal is to ensure the integrity of our security-relevant data. At the same time, we want to offer a frustration-free way to use this data within our development processes. This documentation outlines best practices for managing secrets and passwords in a project environment using 1Password and GitHub.
 
 ## 2. 1Password Vault for Secrets and Passwords
 
@@ -40,7 +40,7 @@ To maintain consistency and clarity, we suggest to use the following naming conv
 - `client`: The name of the client or the main entity associated with the project. (e.g. `haufe`)
 - `project`: The name or identifier of the project itself. (e.g. `powerhelferapp`)
 
-Using this naming convention, we can easily identify which project a vault is associated with.
+Only use Latin letters and no spaces, as only then can this secret be accessed programmatically by name. This improves readability. Using this naming convention, we can easily identify which project a vault is associated with.
 
 ### 2.2 Essential Vault Guidelines
 
@@ -74,10 +74,10 @@ To request Service Account access, reach out to CTO Stefan N with specific detai
 Service Accounts offer several advantages for secure secrets and password management:
 
 - **Enhanced Security:**
-  Service Accounts provide a secure means of accessing and managing sensitive information, ensuring that only authorized processes have the necessary credentials.
+  Service accounts can and always should be scoped to the project specific vault. They can only be used through a token, which withholds a normal login to our organization and can't suffer from a weak password.
 
 - **Streamlined Automation:**
-  By using Service Accounts, workflows are streamlined, and automated processes can be executed efficiently, reducing manual intervention and potential human errors.
+  Service accounts can programmatically access secrets. This enables us to keep a single source of truth and reduce human errors when managing secrets across our automated processes, e.g., in our CI / CD pipelines on GitHub.
 
 - **Clear Audit Trail:**
   Service Accounts facilitate a clear audit trail, documenting each access and action taken. This transparency is essential for monitoring and accountability.
@@ -85,11 +85,11 @@ Service Accounts offer several advantages for secure secrets and password manage
 ### 3.4 Important Considerations
 
 - **Rate Limits and Quotas:**
-  Be mindful of [Rate Limits and Quotas](https://developer.1password.com/docs/service-accounts/rate-limits) to ensure proper usage and prevent potential service disruptions. Regularly monitor and adjust workflows to comply with service provider guidelines.
+  Be mindful of [Rate Limits and Quotas](https://developer.1password.com/docs/service-accounts/rate-limits) to ensure proper usage and prevent potential service disruptions. Regularly monitor and adjust workflows to comply with service provider guidelines. Tip: A stored `.env` file can be accessed with 1 single request, so all variables in there only contribute as one request to the rate limit.
 - **Shared Vault Restriction:**
   Service Accounts cannot be granted access to the default Shared vault. This restriction ensures a clear separation of access privileges and maintains a higher level of security.
 - **Data Access:**
-  We recommend that Service Accounts are permitted to read data from vaults but are restricted from making write operations. This precaution mitigates the risks associated with automated creation and storage of sensitive information.
+  We currently require that all Service Accounts may only read data from vaults and are restricted from making write operations. This precaution mitigates the risks associated with the automated creation and storage of sensitive information.
 
 Implementing Service Accounts in your projects not only enhances security but also contributes to the efficiency and reliability of automated processes. By following the outlined guidelines, you ensure a robust and secure foundation for managing secrets and passwords within your projects.
 
@@ -101,7 +101,7 @@ Now that we have successfully created the service account, we can leverage its t
 
 To seamlessly integrate 1Password into your GitHub Actions, consider using the following actions:
 
-- [load-secrets-from-1password](https://github.com/marketplace/actions/load-secrets-from-1password): This action enables you to fetch secrets securely from your 1Password vault and use them within your GitHub Actions workflows.
+- [load-secrets-from-1password](https://github.com/marketplace/actions/load-secrets-from-1password): This action fetches secrets securely from your 1Password vault and provides them as [masked values](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#masking-a-value-in-a-log) within your GitHub Actions workflows. Note that while a masked value is blacked out in the logs, it cannot be used as output. Therefore, only the steps in the same job have access to the loaded secret. As a reusable workflow must always be a standalone job, this action may not be useful for you.
 
 - [1password-cli](https://github.com/marketplace/actions/1password-cli): This action provides a versatile interface to interact with 1Password using the command-line interface. It allows you to perform various operations, including retrieving secrets, in your GitHub Actions workflows.
 
