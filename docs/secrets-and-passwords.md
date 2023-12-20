@@ -21,7 +21,8 @@ _A documentation on secure management of secrets and passwords in projects_
 5. Best Practices
    - 5.1 Use of Strong Passwords
    - 5.2 Reusable Workflow for getting .env File from 1Password Vault
-6. Conclusion
+6. Handling Leaked Secrets
+7. Conclusion
 
 ---
 
@@ -62,7 +63,7 @@ Service Accounts play a crucial role in enhancing security and optimizing automa
 
 ### 3.1 Requesting Service Account Access
 
-To request Service Account access, reach out to CTO Stefan N with specific details about the vault requiring access. This request can be submitted through Fresh Service or directly via Slack.
+To request Service Account access, reach out to CTO Stefan N with specific details about the vault requiring access. This request can be submitted through [Fresh Service](https://nanogiantsgmbh.freshservice.com/support/catalog/items/74) or directly via Slack.
 
 ### 3.2 Storing Service Account Token
 
@@ -138,6 +139,29 @@ op inject -i FILE.tpl -o FILE
 
 For example, you have a project vault named `nanogiants_docs` and store the `.env.develop` and `.env.staging` as a secret called `env_files`. Set up the `.env.staging.tpl` file with `{{ op://nanogiants_docs/env_files/.env.staging }}` as the content. Then run `op inject -i .env.staging.tpl -o .env.staging` to get a current version of the env file.
 
-## 6. Conclusion
+## 6. Handling Leaked Secrets
 
-Secure management of secrets and passwords is a critical aspect of any project. The use of a password manager like 1Password and the integration of there GitHub Actions into workflows contribute to safeguarding sensitive information and ensuring project security. By adhering to these recommendations, the confidentiality and integrity of data are protected, minimizing potential security risks.
+In the event that a sensitive secret or password has been accidentally leaked into version control or other instances, it is crucial to take swift and effective action to mitigate potential security risks. As part of our robust security measures, every pull request undergoes a comprehensive check using SonarCloud. SonarCloud automatically scans and assesses each pull request, providing detailed information about potential issues, including the inadvertent inclusion of leaked secrets.
+This section outlines the recommended steps to follow if such an incident occurs.
+
+1. **Assessment of Impact:**
+
+- Determine the sensitivity and potential impact of the leaked secret. Assess whether the compromised information poses a significant security risk to the project or its associated systems.
+
+2. **Immediate Remediation:**
+
+- Revoke and Rotate Credentials:
+  - Immediately revoke and rotate the leaked information to prevent unauthorized access. This applies to any affected accounts, services, or systems.
+
+3. **Communication:**
+
+- Notify Relevant Parties:
+  - Inform relevant team members, project stakeholders, or security personnel about the incident. Transparent communication is crucial for coordinated efforts to address the situation effectively.
+- Update Documentation:
+  - Document the incident in the project's documentation. Describe the nature of the leak, actions taken, and any lessons learned.
+
+By following these steps, you can effectively address and remediate incidents involving leaked secrets in version control.
+
+## 7. Conclusion
+
+Secure management of secrets and passwords is a critical aspect of any project. The use of a password manager like 1Password and the integration of their GitHub Actions into workflows contribute to safeguarding sensitive information and ensuring project security. By adhering to these recommendations, the confidentiality and integrity of data are protected, minimizing potential security risks.
