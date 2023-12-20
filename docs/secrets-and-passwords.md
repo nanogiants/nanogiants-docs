@@ -22,7 +22,8 @@ _A documentation on secure management of secrets and passwords in projects_
    - 5.1 Use of Strong Passwords
    - 5.2 Reusable Workflow for getting .env File from 1Password Vault
 6. Handling Leaked Secrets
-7. Conclusion
+7. Organizational-Level Secrets Management
+8. Conclusion
 
 ---
 
@@ -162,6 +163,23 @@ This section outlines the recommended steps to follow if such an incident occurs
 
 By following these steps, you can effectively address and remediate incidents involving leaked secrets in version control.
 
-## 7. Conclusion
+## 7. Organizational-Level Secrets Management
+
+As part of our secrets management strategy, we have chosen not to utilize 1Password for organizational secrets. Instead, we rely on GitHub organization secrets due to several considerations:
+
+- **Infrequent Changes:**
+
+  - Organizational secrets often require changes less frequently than project-specific secrets. GitHub organization secrets provide a practical solution for managing such static information without the need for constant updates.
+
+- **Deliberate Changes:**
+
+  - Changes to organization secrets are deliberate and require thoughtful consideration. GitHub's centralized approach ensures that when modifications are necessary, they are made intentionally, reducing the likelihood of hasty or accidental changes that could impact all projects.
+
+- **No Impact on 1Password's Rate Limits:**
+  - By leveraging GitHub organization secrets, we avoid adding to the rate limits of 1Password. This ensures uninterrupted access to password management services for their primary use cases, without being impacted by infrequent changes to organizational secrets.
+
+In summary, the use of GitHub organization secrets is a strategic choice aimed at improving efficiency, security, and collaboration across our projects. This approach aligns with our commitment to maintaining a robust and streamlined secrets management process at both the project and organizational levels.
+
+## 8. Conclusion
 
 Secure management of secrets and passwords is a critical aspect of any project. The use of a password manager like 1Password and the integration of their GitHub Actions into workflows contribute to safeguarding sensitive information and ensuring project security. By adhering to these recommendations, the confidentiality and integrity of data are protected, minimizing potential security risks.
