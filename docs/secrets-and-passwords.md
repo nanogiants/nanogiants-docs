@@ -4,32 +4,34 @@ _A documentation on secure management of secrets and passwords in projects_
 
 ---
 
-**Table of Contents**
+## Table of Contents
 
-1. Introduction
-2. 1Password Vault for Secrets and Passwords
-   - 2.1 Vault Naming Conventions
-   - 2.2 Essential Vault Guidelines
-3. 1Password Service Accounts
-   - 3.1 Requesting Service Account Access
-   - 3.2 Storing Service Account Token
-   - 3.3 Why Use Service Accounts?
-   - 3.4 Important Considerations
-4. Using 1Passwords GitHub Actions
-   - 4.1 Integration
-   - 4.2 Secrets Reference Syntax
-5. Best Practices
-   - 5.1 Use of Strong Passwords
-   - 5.2 Reusable Workflow for getting .env File from 1Password Vault
-6. Handling Leaked Secrets
-7. Organizational-Level Secrets Management
-8. Conclusion
+1. [Introduction](#1-introduction)
+2. [1Password Vault for Secrets and Passwords](#2-1password-vault-for-secrets-and-passwords)
+   - [2.1 Vault Naming Conventions](#21-vault-naming-conventions)
+   - [2.2 Essential Vault Guidelines](#22-essential-vault-guidelines)
+3. [1Password Service Accounts](#3-1password-service-accounts)
+   - [3.1 Requesting Service Account Access](#31-requesting-service-account-access)
+   - [3.2 Storing Service Account Token](#32-storing-service-account-token)
+   - [3.3 Why Use Service Accounts?](#33-why-use-service-accounts)
+   - [3.4 Important Considerations](#34-important-considerations)
+4. [Using 1Passwords GitHub Actions](#4-using-1passwords-github-actions)
+   - [4.1 Integration](#41-integration)
+   - [4.2 Secrets Reference Syntax](#42-secrets-reference-syntax)
+5. [Best Practices](#5-best-practices)
+   - [5.1 Use of Strong Passwords](#51-use-of-strong-passwords)
+   - [5.2 Reusable Workflow for getting .env File from 1Password Vault](#52-reusable-workflow-for-getting-env-file-from-1password-vault)
+6. [Handling Leaked Secrets](#6-handling-leaked-secrets)
+7. [Organizational-Level Secrets Management](#7-organizational-level-secrets-management)
+8. [Conclusion](#8-conclusion)
 
 ---
 
 ## 1. Introduction
 
 Ensuring the security of secrets and passwords in a project is of paramount importance to safeguard sensitive information from unauthorized access. Our goal is to ensure the integrity of our security-relevant data. At the same time, we want to offer a frustration-free way to use this data within our development processes. This documentation outlines best practices for managing secrets and passwords in a project environment using 1Password and GitHub.
+
+**[back to top](#table-of-contents)**
 
 ## 2. 1Password Vault for Secrets and Passwords
 
@@ -57,6 +59,8 @@ To enhance security and streamline management, it's crucial to adhere to the fol
    Establish a centralized repository for all project-related assets, including passwords, secrets, dotenv files, certificates, etc. This vault serves as the ultimate **SOURCE OF TRUTH** for all sensitive project information.
 
 By implementing these practices, we aim to create a well-organized and secure system for managing project assets while promoting accessibility for authorized personnel.
+
+**[back to top](#table-of-contents)**
 
 ## 3. 1Password Service Accounts
 
@@ -95,6 +99,8 @@ Service Accounts offer several advantages for secure secrets and password manage
 
 Implementing Service Accounts in your projects not only enhances security but also contributes to the efficiency and reliability of automated processes. By following the outlined guidelines, you ensure a robust and secure foundation for managing secrets and passwords within your projects.
 
+**[back to top](#table-of-contents)**
+
 ## 4. Using 1Passwords GitHub Actions
 
 Now that we have successfully created the service account, we can leverage its token to access items from our project vault within our workflows. This process involves utilizing the official 1Password GitHub Actions, such as [load-secrets-from-1password](https://github.com/marketplace/actions/load-secrets-from-1password) or [1password-cli](https://github.com/marketplace/actions/1password-cli).
@@ -112,6 +118,8 @@ To seamlessly integrate 1Password into your GitHub Actions, consider using the f
 When referencing items from your 1Password vault, it's crucial to follow the correct syntax. The [1Password Secrets Reference Syntax](https://developer.1password.com/docs/cli/secrets-reference-syntax/) documentation provides detailed information on how to structure references to ensure accurate retrieval of items.
 
 By combining the generated token from the service account with these GitHub Actions and adhering to the Secrets Reference Syntax, you can seamlessly integrate 1Password into your workflows, enhancing the security and efficiency of your project's secret management.
+
+**[back to top](#table-of-contents)**
 
 ## 5. Best Practices
 
@@ -140,6 +148,8 @@ op inject -i FILE.tpl -o FILE
 
 For example, you have a project vault named `nanogiants_docs` and store the `.env.develop` and `.env.staging` as a secret called `env_files`. Set up the `.env.staging.tpl` file with `{{ op://nanogiants_docs/env_files/.env.staging }}` as the content. Then run `op inject -i .env.staging.tpl -o .env.staging` to get a current version of the env file.
 
+**[back to top](#table-of-contents)**
+
 ## 6. Handling Leaked Secrets
 
 In the event that a sensitive secret or password has been accidentally leaked into version control or other instances, it is crucial to take swift and effective action to mitigate potential security risks. As part of our robust security measures, every pull request undergoes a comprehensive check using SonarCloud. SonarCloud automatically scans and assesses each pull request, providing detailed information about potential issues, including the inadvertent inclusion of leaked secrets.
@@ -163,6 +173,8 @@ This section outlines the recommended steps to follow if such an incident occurs
 
 By following these steps, you can effectively address and remediate incidents involving leaked secrets in version control.
 
+**[back to top](#table-of-contents)**
+
 ## 7. Organizational-Level Secrets Management
 
 As part of our secrets management strategy, we have chosen not to utilize 1Password for organizational secrets. Instead, we rely on GitHub organization secrets due to several considerations:
@@ -180,6 +192,10 @@ As part of our secrets management strategy, we have chosen not to utilize 1Passw
 
 In summary, the use of GitHub organization secrets is a strategic choice aimed at improving efficiency, security, and collaboration across our projects. This approach aligns with our commitment to maintaining a robust and streamlined secrets management process at both the project and organizational levels.
 
+**[back to top](#table-of-contents)**
+
 ## 8. Conclusion
 
 Secure management of secrets and passwords is a critical aspect of any project. The use of a password manager like 1Password and the integration of their GitHub Actions into workflows contribute to safeguarding sensitive information and ensuring project security. By adhering to these recommendations, the confidentiality and integrity of data are protected, minimizing potential security risks.
+
+**[back to top](#table-of-contents)**
