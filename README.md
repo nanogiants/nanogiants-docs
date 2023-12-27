@@ -17,6 +17,7 @@ This repository contains all documentation about the NanoGiants tech stack and o
   - [Tech Stack](#tech-stack)
   - [Reusable Workflows Guide](#reusable-workflows-guide)
   - [Project Secrets and Password Management](#project-secrets-and-password-management)
+  - [Protecting Secrets from getting into Git repositories](#protecting-secrets-from-getting-into-git-repositories)
   - [Using OpenID Connect for AWS Jobs in GitHub Actions](#using-openid-connect-for-aws-jobs-in-github-actions)
   - [Related work](#related-work)
   - [Contributing](#contributing)
@@ -48,6 +49,10 @@ See [Reusable Workflows Guide](docs/reusable-workflows.md)
 See [Project Secrets and Password Management](docs/secrets-and-passwords.md)
 
 **[back to top](#table-of-contents)**
+
+## Protecting Secrets from getting into Git repositories
+
+See [Protecting Secrets from getting into Git repositories](docs/protect-secrets-from-getting-into-github-repos.md)
 
 ## Using OpenID Connect for AWS Jobs in GitHub Actions
 
