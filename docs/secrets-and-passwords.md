@@ -68,7 +68,7 @@ Service Accounts play a crucial role in enhancing security and optimizing automa
 
 ### 3.1 Requesting Service Account Access
 
-To request Service Account access, reach out to CTO Stefan N with specific details about the vault requiring access. This request can be submitted through [Fresh Service](https://nanogiantsgmbh.freshservice.com/support/catalog/items/74) or directly via Slack.
+To request Service Account access, reach out to CTO Stefan N with specific details about the vault requiring access. This request can be submitted through [Fresh Service](https://nanogiantsgmbh.freshservice.com/support/catalog/items/74).
 
 ### 3.2 Storing Service Account Token
 
