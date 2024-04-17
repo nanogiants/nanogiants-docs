@@ -1,4 +1,4 @@
-# NanoGiants Docs - Developmnent 
+# NanoGiants Docs - Development 
 <!-- section: Introduction -->
 <!-- Describe what this document refers to. At what target audience is it aimed? -->
 
