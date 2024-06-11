@@ -28,7 +28,7 @@
 
 ### **NestJS:**
 
-NestJS is a progressive Node.js framework for building efficient, reliable, and scalable server-side applications. It uses TypeScript by default and follows the modular architecture pattern.
+[NestJS](https://github.com/nestjs/nest) is a progressive Node.js framework for building efficient, reliable, and scalable server-side applications. It uses TypeScript by default and follows the modular architecture pattern.
 
 **[back to top](#table-of-contents)**
 
@@ -288,7 +288,7 @@ Testing ensures the reliability and correctness of the API. It is crucial for ma
 - **Principle:** Test individual components of the API to ensure they work as expected.
 - **Explanation:** Unit tests help catch bugs early in the development process.
 - **Scope:** Individual functions or methods.
-- **Tools:** Jest (with NestJS).
+- **Tools:** [Jest](https://github.com/jestjs/jest) (with [NestJS](https://github.com/nestjs/nest)).
 - **What to Test:**
   - Correctness of individual functions.
   - Edge cases and error handling.
@@ -298,7 +298,7 @@ Testing ensures the reliability and correctness of the API. It is crucial for ma
 - **Principle:** Test interactions between components and with external systems.
 - **Explanation:** Integration tests ensure that different parts of the system work together correctly.
 - **Scope:** Interactions between multiple components or services.
-- **Tools:** Supertest (with Jest and NestJS).
+- **Tools:** [Supertest](https://github.com/ladjs/supertest) (with [Jest](https://github.com/jestjs/jest) and [NestJS](https://github.com/nestjs/nest)).
 - **What to Test:**
   - API endpoints and their responses.
   - Database interactions.
