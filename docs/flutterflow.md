@@ -2,22 +2,23 @@
 
 ## Table of contents
 
-- [Table of contents](#table-of-contents)
-- [What is Flutterflow?](#what-is-flutterflow)
-- [When to use Flutterflow?](#when-to-use-flutterflow)
-- [Setting up a new project](#setting-up-a-new-project)
-  - [Create a new project](#create-a-new-project)
-  - [Adding a Github repository](#adding-a-github-repository)
-  - [Integrating Firebase](#integrating-firebase)
-- [Building blocks](#building-blocks)
-  - [Icons](#icons)
-- [Custom Code](#custom-code)
-- [Branching, merging, and versioning](#branching-merging-and-versioning)
-- [Best Practices](#best-practices)
-  - [Keep components small](#keep-components-small)
-  - [Folder structure](#folder-structure)
-  - [Use the local tooling](#use-the-local-tooling)
-- [Ejecting](#ejecting)
+- [NanoGiants Docs - Flutterflow](#nanogiants-docs---flutterflow)
+  - [Table of contents](#table-of-contents)
+  - [What is Flutterflow?](#what-is-flutterflow)
+  - [When to use Flutterflow?](#when-to-use-flutterflow)
+  - [Setting up a new project](#setting-up-a-new-project)
+    - [Getting started](#getting-started)
+    - [Adding a Github repository](#adding-a-github-repository)
+    - [Integrating Firebase](#integrating-firebase)
+  - [Building blocks](#building-blocks)
+    - [Icons](#icons)
+  - [Custom Code](#custom-code)
+  - [Branching, merging, and versioning](#branching-merging-and-versioning)
+  - [Best Practices](#best-practices)
+    - [Keep components small](#keep-components-small)
+    - [Folder structure](#folder-structure)
+    - [Use the local tooling](#use-the-local-tooling)
+  - [Ejecting](#ejecting)
 
 ---
 
@@ -49,11 +50,38 @@ Flutterfow is able to export your project as Flutter code so that complex change
 
 ## Setting up a new project
 
-### Create a new project
+Setting up a new project is where Flutterflow really shines. The process is streamlined and helpful. I will document the first steps to give an idea of what to look our for.
+
+### Getting started
+
+- The getting started dialogue offers a selection of templates to get the project started. For customizability it is probably best to use a blank app, but the templates are an excelent way to inspect the the inner workings of flutterflow and the elements that are offered.
+  ![Creation Screen](../files/flutterflow_screenshots/Bildschirmfoto%202024-06-26%20um%2020.07.45.png)
+
+- Next step is to choose thhe package name and color themes. The package name is what will be used to identify the project on the app stores if you decide to publish it with Flutterflow.
+  ![Creation Screen](../files/flutterflow_screenshots/Bildschirmfoto%202024-06-26%20um%2020.08.20.png)
+- The color themes are just a suggestions to get started and can be changed later on.
+- As seen above the project can be published to the web as well.
+- Lastly Flutterflow will offer to bootstrap and connect a new Firebase project, too. If this is acceptable for the project, Firebase should definitely be considered as it offers a deep integration with Flutterflow. However, I would reccomend to set up the Firebase project manually as it is kind of error prone to let Flutterflow do it for you.
 
 ### Adding a Github repository
 
+- Strictly speaking, this step is optional, as Flutterflow can handle your project without a code repository connected. However, there are some benefits to having a code repository connected including:
+  - The ability to inspect the code and history of the project
+  - Building the app manually and locally
+  - Capability to edit the code manually and eject the project from Flutterflow
+- Currently only Github is supported and connecting to the repository is very straight forward as shown below:
+  ![Github Screenshot](../files/flutterflow_screenshots/Bildschirmfoto%202024-06-26%20um%2020.25.39.png)
+
+- Once the repository is connected, Flutterflow will create a branch called 'Flutterflow' and push your changes to the repository on request.
+  ![Github Screenshot](../files/flutterflow_screenshots/Bildschirmfoto%202024-06-26%20um%2020.28.16.png)
+
+- 🚩 be aware that changes to the code in the repository will not be reflected in the Flutterflow project. They can not be integrated back into the project.
+
 ### Integrating Firebase
+
+- Firebase is a useful tool to integrate ready made authenitcation, database, user management, storage and other features into your Flutterflow project.
+  As mentioned above I would recommend to set up the Firebase project manually. You might also need a google cloud account. Create these two and save the project ids. Furthermore you will need to add the following e-mail address as editor to the Firebase project: firebase@flutterflow.io#
+  ![Firebase Screenshot](../files/flutterflow_screenshots/Bildschirmfoto%202024-06-26%20um%2020.30.33.png)
 
 ---
 
