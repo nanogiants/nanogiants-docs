@@ -3,17 +3,17 @@
 ## Table of contents
 
 - [Table of contents](#table-of-contents)
-- [What is Flutterflow?](#what-is-a-tech-stack)
+- [What is Flutterflow?](#what-is-flutterflow)
 - [When to use Flutterflow?](#when-to-use-flutterflow)
 - [Setting up a new project](#setting-up-a-new-project)
   - [Create a new project](#create-a-new-project)
   - [Adding a Github repository](#adding-a-github-repository)
   - [Integrating Firebase](#integrating-firebase)
-- [Building blocks](#buildingblocks)
+- [Building blocks](#building-blocks)
   - [Icons](#icons)
-- [Custom Code](#customcode)
+- [Custom Code](#custom-code)
 - [Branching, merging, and versioning](#branching-merging-and-versioning)
-- [Best Practices](#how-do-we-visualize-our-tech-stack)
+- [Best Practices](#best-practices)
   - [Keep components small](#keep-components-small)
   - [Folder structure](#folder-structure)
   - [Use the local tooling](#use-the-local-tooling)
@@ -44,5 +44,43 @@ Flutterfow is able to export your project as Flutter code so that complex change
 - Complexity 🧐: If the requirements of the project are not within Flutterflow's capabilities, it is probably best to use Flutter directly or concider a different technology all together.
 - Personell 👨‍💻: If a lot of developers are going to work on the project (e.g. more than 2), Flutterflow is probably not the best choice as version control, history, branching and merging are going to pose a challenge.
 - Maintainability ⚙: If long term maintainability is a priority, it is probably better to use a different technology. Flutterflow projects can be hard to understand and maintain at a later stage, refactoring tends to be difficult and the project will always be dependet on Flutterflows dependencies. E.g. Flutterflow dictates a certain Flutter version, which again prohibits using certain libraries.
+
+---
+
+## Setting up a new project
+
+### Create a new project
+
+### Adding a Github repository
+
+### Integrating Firebase
+
+---
+
+## Building blocks
+
+### Icons
+
+---
+
+## Custom Code
+
+---
+
+## Branching, merging, and versioning
+
+---
+
+## Best Practices
+
+### Keep components small
+
+### Folder structure
+
+### Use the local tooling
+
+---
+
+## Ejecting
 
 **[back to top](#table-of-contents)**
