@@ -153,16 +153,19 @@ If you also want to implement JWT (JSON Web Token) strategy, add the following:
    import { Strategy, ExtractJwt } from 'passport-jwt';
    import { PassportStrategy } from '@nestjs/passport';
    import { Injectable } from '@nestjs/common';
-   import { jwtConstants } from './constants';
+   import { configService } from './constants';
    import { UserService } from '../user/user.service';
 
    @Injectable()
    export class JwtStrategy extends PassportStrategy(Strategy) {
-     constructor(private readonly userService: UserService) {
+     constructor(
+       private readonly userService: UserService,
+       private readonly configService: ConfigService
+     ) {
        super({
          jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
          ignoreExpiration: false,
-         secretOrKey: jwtConstants.secret,
+         secretOrKey: configService.get('JWT_SECRET'),
        });
      }
 
@@ -172,16 +175,105 @@ If you also want to implement JWT (JSON Web Token) strategy, add the following:
    }
    ```
 
-2. **JWT Constants:**
+2. **JWT Secret:**
 
-   Define JWT constants (`constants.ts`) for token configuration.
+   For JWT (JSON Web Token) implementation, you need a secret key to sign and verify tokens. This secret should be securely stored and managed. Here’s how you can manage the JWT Secret in your NestJS application:
+
+   #### Create a Configuration Service
+
+   First, create a configuration service (`config.service.ts`) to manage environment variables and configuration values. This service will fetch the JWT secret from your environment variables or configuration files.
 
    ```typescript
-   // constants.ts
-   export const jwtConstants = {
-     secret: 'your-secret-key', // Replace with your own secret key
-   };
+   // config.service.ts
+   import { Injectable } from '@nestjs/common';
+
+   @Injectable()
+   export class ConfigService {
+     private readonly envConfig: Record<string, string>;
+
+     constructor() {
+       this.envConfig = {
+         JWT_SECRET: process.env.JWT_SECRET, // Set this in your environment variables
+       };
+     }
+
+     get(key: string): string {
+       return this.envConfig[key];
+     }
+   }
    ```
+
+   #### Set JWT_SECRET in Environment Variables
+
+   Ensure you set the `JWT_SECRET` environment variable in your deployment environment or local development environment. This secret is crucial for securing your JWT tokens.
+
+   For example in your `.env` file:
+
+   ```
+   JWT_SECRET=my_secret_key
+   ```
+
+   #### Accessing JWT Secret in JwtStrategy
+
+   Modify your `jwt.strategy.ts` to use the `ConfigService` to fetch the JWT secret:
+
+   ```typescript
+   // jwt.strategy.ts
+   import { Strategy, ExtractJwt } from 'passport-jwt';
+   import { PassportStrategy } from '@nestjs/passport';
+   import { Injectable } from '@nestjs/common';
+   import { ConfigService } from './config.service'; // Adjust the import based on your actual file structure
+   import { UserService } from '../user/user.service';
+
+   @Injectable()
+   export class JwtStrategy extends PassportStrategy(Strategy) {
+     constructor(
+       private readonly userService: UserService,
+       private readonly configService: ConfigService
+     ) {
+       super({
+         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+         ignoreExpiration: false,
+         secretOrKey: configService.get('JWT_SECRET'), // Fetch JWT_SECRET from ConfigService
+       });
+     }
+
+     async validate(payload: any) {
+       return this.userService.findById(payload.sub);
+     }
+   }
+   ```
+
+   #### Usage in Module
+
+   Ensure you provide the `ConfigService` and `JwtStrategy` in your module:
+
+   ```typescript
+   // app.module.ts
+   import { Module } from '@nestjs/common';
+   import { JwtModule } from '@nestjs/jwt';
+   import { ConfigModule } from './config.module'; // Adjust the import based on your actual file structure
+   import { UserService } from '../user/user.service';
+   import { JwtStrategy } from './jwt.strategy';
+
+   @Module({
+     imports: [
+       ConfigModule, // Import your ConfigModule that provides ConfigService
+       JwtModule.register({
+         secret: process.env.JWT_SECRET, // Optional: Directly provide secret here for JwtModule if needed
+       }),
+     ],
+     providers: [UserService, JwtStrategy],
+     exports: [UserService, JwtStrategy], // Export JwtStrategy to be used in other modules
+   })
+   export class AppModule {}
+   ```
+
+   ### Summary
+
+   - **JWT Secret** is a crucial part of JWT security. It should be securely managed and stored.
+   - Use a `ConfigService` to fetch the JWT secret from environment variables or configuration files.
+   - Ensure the `JwtStrategy` uses the `ConfigService` to fetch the JWT secret for token verification.
 
 ### Step 3: Implementing Authorization
 
