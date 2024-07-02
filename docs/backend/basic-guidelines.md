@@ -135,8 +135,9 @@ When designing a REST API, it’s essential to follow certain principles to ensu
 ### 1. **Resource-Based URLs**
 
 - **Principle:** Use nouns to represent resources in URLs.
-- **Example:** `/user`, `/order`, `/product`
+- **Example:** `/users`, `/orders`, `/products`
 - **Explanation:** Each URL should represent a specific resource, and actions on resources are determined by the HTTP methods used.
+- **Recommendation:** Use plural nouns to represent resources (e.g., `/users` instead of `/user`). This convention helps to keep the URL structure consistent and intuitive. However, if there is a strong and well-reasoned justification for using singular nouns, exceptions can be made. The key is to maintain clarity and consistency within the project.
 
 ### 2. **HTTP Methods**
 
@@ -166,9 +167,9 @@ When designing a REST API, it’s essential to follow certain principles to ensu
     - **404 Not Found:** Resource not found.
     - **500 Internal Server Error:** Server encountered an error.
     - ...
-  - **Error Messages:** Provide clear and meaningful error messages.
+  - **Error Messages:** Provide clear and meaningful error messages. We recommend referring to the [RFC7807 Standard](https://tools.ietf.org/html/rfc7807) for generating meaningful error messages, but this is optional and not a strict convention.
   - **Data Format:** Use a consistent format for data, typically JSON.
-- **Explanation:** Clear and consistent responses help clients handle different scenarios effectively.
+- **Explanation:** Clear and consistent responses help clients handle different scenarios effectively. Using a standard like RFC7807 can enhance the clarity and utility of error messages but is not mandatory.
 
 ### 5. **Versioning**
 
@@ -177,6 +178,7 @@ When designing a REST API, it’s essential to follow certain principles to ensu
   - **URI Versioning:** Include the version in the URL (e.g., `/v1/user`).
   - **Header Versioning:** Use custom headers to specify the version (e.g., `X-API-Version: 1`).
 - **Explanation:** Versioning ensures backward compatibility and allows for continuous improvement of the API.
+- **Recommendation:** We do not prefer one approach over the other as long as it follows either URI or Header versioning principles.
 
 ### 6. **Pagination, Filtering and Sorting**
 
@@ -215,7 +217,7 @@ Comprehensive API documentation is essential for understanding and interacting w
 
 1. **API Specification**
 
-   - **Principle:** Define the API using a standard specification like OpenAPI/Swagger.
+   - **Principle:** Define the API using the standard specification of OpenAPI/Swagger.
    - **Explanation:** This helps in generating interactive API documentation and client libraries.
 
 2. **Usage Examples**
@@ -226,7 +228,25 @@ Comprehensive API documentation is essential for understanding and interacting w
 3. **Error Codes**
 
    - **Principle:** Document possible error codes and their meanings.
-   - **Explanation:** Clear error documentation helps developers debug and handle errors appropriately.
+   - **Explanation:** Clear error documentation helps developers debug and handle errors appropriately. If you rely on the [RFC7807 Standard](https://tools.ietf.org/html/rfc7807), you can skip documenting error codes manually, as the standard provides a structured way to convey error information.
+
+   #### Example of Defining an Error Code (if not using a standard):
+
+   ```json
+   {
+     "error_code": "USER_NOT_FOUND",
+     "message": "The specified user does not exist.",
+     "details": {
+       "user_id": "12345"
+     }
+   }
+   ```
+
+   In this example:
+
+   - **error_code:** A unique identifier for the error.
+   - **message:** A human-readable description of the error.
+   - **details:** Additional information to help diagnose the issue.
 
 4. **Authentication Details**
    - **Principle:** Explain how to authenticate and authorize requests.
@@ -244,7 +264,7 @@ In addition to API documentation, comprehensive backend documentation covers var
 2. **Database Schema**
 
    - **Principle:** Document the structure of the database, including tables, columns, relationships, and constraints.
-   - **Explanation:** Database schema documentation assists developers in understanding data models and query requirements.
+   - **Explanation:** Database schema documentation assists developers in understanding data models and query requirements. We recommend displaying database schemas as Entity-Relationship Diagrams (ERD) for better visualization. For working with the database in general, we recommend using [DBeaver](https://dbeaver.io/). DBeaver allows you to easily generate ERDs and manage your database effectively.
 
 3. **Configuration**
 
@@ -283,15 +303,132 @@ Backend documentations provide crucial insights into the backend system's design
 
 Testing ensures the reliability and correctness of the API. It is crucial for maintaining the quality and stability of the API as it evolves.
 
-### Unit Testing:
+### Unit Testing
 
 - **Principle:** Test individual components of the API to ensure they work as expected.
 - **Explanation:** Unit tests help catch bugs early in the development process.
 - **Scope:** Individual functions or methods.
 - **Tools:** [Jest](https://github.com/jestjs/jest) (with [NestJS](https://github.com/nestjs/nest)).
 - **What to Test:**
+
   - Correctness of individual functions.
   - Edge cases and error handling.
+
+- **Recommendation:** Follow the [FIRST principles](https://medium.com/@tasdikrahman/f-i-r-s-t-principles-of-testing-1a497acda8d6) for unit tests:
+
+  - **Fast:** Tests should run quickly.
+  - **Isolated:** Tests should not depend on other tests or external systems.
+  - **Repeatable:** Tests should produce the same results every time.
+  - **Self-Validating:** Tests should have a clear pass/fail outcome.
+  - **Timely:** Write tests at the right time, ideally before the code they test.
+
+- **What NOT to Test:**
+  - **Dependencies:** Do not test external dependencies directly. This includes:
+    - **External APIs:** Avoid making real HTTP requests to external services. Instead, mock these calls to return predefined responses.
+    - **Databases:** Do not perform actual database operations. Use mock databases or in-memory databases to simulate interactions.
+    - **File Systems:** Avoid reading from or writing to the actual file system. Mock file system operations as needed.
+  - **Frameworks and Libraries:** Do not test the functionality of third-party libraries or frameworks. Assume they work as documented.
+  - **Configurations:** Avoid testing configuration settings or environment variables directly in unit tests. These should be handled by integration or system tests.
+
+Mocking dependencies helps achieve isolated tests, ensuring that unit tests focus solely on the logic of the component being tested and not on the behavior of external systems.
+
+#### Example of a Good Test:
+
+A good test is fast, isolated, and validates the correctness of a function in various scenarios, including edge cases.
+
+```javascript
+// Example of a good unit test in Jest
+
+import { calculateTotal } from './orderService.js';
+
+describe('calculateTotal', () => {
+  it('should return the correct total for a list of items', () => {
+    const items = [
+      { price: 10, quantity: 2 },
+      { price: 5, quantity: 1 },
+    ];
+    const result = calculateTotal(items);
+    expect(result).toBe(25); // 10*2 + 5*1 = 25
+  });
+
+  it('should return 0 if no items are provided', () => {
+    const items = [];
+    const result = calculateTotal(items);
+    expect(result).toBe(0);
+  });
+
+  it('should handle items with zero quantity', () => {
+    const items = [{ price: 10, quantity: 0 }];
+    const result = calculateTotal(items);
+    expect(result).toBe(0);
+  });
+});
+```
+
+#### Example of a Bad Test:
+
+A bad test is slow, not isolated, and tests external dependencies directly, making it unreliable and harder to maintain.
+
+```javascript
+// Example of a bad unit test in Jest
+
+import { fetchUserProfile } from './userService.js';
+import axios from 'axios';
+
+describe('fetchUserProfile', () => {
+  it('should return user profile data from an external API', async () => {
+    const userId = 1;
+    const response = await fetchUserProfile(userId);
+    expect(response).toBeDefined();
+    expect(response.data).toHaveProperty('id', userId);
+  });
+
+  it('should handle non-existent user gracefully', async () => {
+    const userId = 999; // Assume this user does not exist in the external API
+    const response = await fetchUserProfile(userId);
+    expect(response).toEqual({ error: 'User not found' });
+  });
+});
+```
+
+**Problems with the Bad Test:**
+
+- **Slow:** It makes actual HTTP requests to an external API, making it slow.
+- **Not Isolated:** It depends on the external API's state, making it unreliable.
+- **Hard to Maintain:** Changes in the external API can break the test.
+
+**Improved Version with Mocking:**
+
+```javascript
+// Improved unit test with mocked dependency
+
+import { fetchUserProfile } from './userService.js';
+import axios from 'axios';
+jest.mock('axios');
+
+describe('fetchUserProfile', () => {
+  it('should return user profile data from an external API', async () => {
+    const userId = 1;
+    const mockResponse = { data: { id: userId, name: 'John Doe' } };
+    axios.get.mockResolvedValue(mockResponse);
+
+    const response = await fetchUserProfile(userId);
+    expect(response).toBeDefined();
+    expect(response.data).toHaveProperty('id', userId);
+    expect(response.data).toHaveProperty('name', 'John Doe');
+  });
+
+  it('should handle non-existent user gracefully', async () => {
+    const userId = 999;
+    axios.get.mockResolvedValue({ data: { error: 'User not found' } });
+
+    const response = await fetchUserProfile(userId);
+    expect(response).toEqual({ error: 'User not found' });
+  });
+});
+```
+
+In the improved version, `axios` is mocked to return predefined responses, making the test isolated, fast, and reliable.
 
 ### (Optional) Integration Testing:
 
@@ -304,12 +441,25 @@ Testing ensures the reliability and correctness of the API. It is crucial for ma
   - Database interactions.
   - Service communication.
 
-### Best Practices:
+### Best Practices
 
-- Write clear, concise, and isolated tests.
-- Follow the AAA (Arrange, Act, Assert) pattern.
-- Use mocks and stubs where appropriate to isolate dependencies.
-- Ensure high code coverage, but prioritize meaningful tests over coverage metrics.
-- Automate tests to run on every commit using CI/CD pipelines.
+- **Clear and Isolated Tests:**
+
+  - Write tests that are clear, concise, and isolated.
+  - Follow the AAA (Arrange, Act, Assert) pattern for readability and structure.
+  - Use mocks and stubs judiciously to isolate dependencies.
+
+- **Coverage and Prioritization:**
+
+  - Aim for a minimum test coverage of 80% to ensure adequate code validation.
+  - Prioritize meaningful tests over achieving high coverage metrics alone.
+
+- **Automation and Integration:**
+
+  - Automate tests to execute on every commit using CI/CD pipelines.
+  - Ensure tests are fast-running (Fast), independent of external factors (Isolated), repeatable in any environment (Repeatable), self-validating without manual intervention (Self-Validating), and written in a timely manner (Timely) to maximize their effectiveness. ([See: FIRST principles](https://medium.com/@tasdikrahman/f-i-r-s-t-principles-of-testing-1a497acda8d6))
+
+- **Exclusions and Considerations:**
+  - Define exclusions for test coverage, such as test utilities (e.g., factories), and avoid testing aspects like test code itself or aspects difficult to unit test effectively.
 
 **[back to top](#table-of-contents)**
