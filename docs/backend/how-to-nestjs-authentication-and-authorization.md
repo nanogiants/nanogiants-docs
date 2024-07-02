@@ -28,7 +28,7 @@
 First, install required packages for authentication and authorization:
 
 ```bash
-npm install @nestjs/passport passport passport-local passport-jwt bcryptjs
+npm install @nestjs/passport passport passport-local passport-jwt bcrypt
 npm install @nestjs/jwt
 ```
 
@@ -94,7 +94,7 @@ npm install @nestjs/jwt
    import { JwtService } from '@nestjs/jwt';
    import { UserService } from '../user/user.service';
    import { User } from '../user/user.entity';
-   import * as bcrypt from 'bcryptjs';
+   import bcrypt from 'bcrypt';
 
    @Injectable()
    export class AuthService {
