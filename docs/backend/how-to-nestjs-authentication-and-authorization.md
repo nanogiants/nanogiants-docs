@@ -19,6 +19,8 @@
 
 [Authentication](https://docs.nestjs.com/security/authentication) and [authorization](https://docs.nestjs.com/security/authorization) are essential aspects of backend development to ensure secure access to resources. In this guide, we'll cover how to implement these features using NestJS.
 
+**[back to top](#table-of-contents)**
+
 ## Implementation Steps
 
 ### Step 1: Setting Up Dependencies
@@ -29,6 +31,8 @@ First, install required packages for authentication and authorization:
 npm install @nestjs/passport passport passport-local passport-jwt bcryptjs
 npm install @nestjs/jwt
 ```
+
+**[back to top](#table-of-contents)**
 
 ### Step 2: Implementing Authentication
 
@@ -139,6 +143,8 @@ npm install @nestjs/jwt
      }
    }
    ```
+
+**[back to top](#table-of-contents)**
 
 #### Authentication Strategy (JWT)
 
@@ -269,11 +275,13 @@ If you also want to implement JWT (JSON Web Token) strategy, add the following:
    export class AppModule {}
    ```
 
-   ### Summary
+   #### Summary
 
    - **JWT Secret** is a crucial part of JWT security. It should be securely managed and stored.
    - Use a `ConfigService` to fetch the JWT secret from environment variables or configuration files.
    - Ensure the `JwtStrategy` uses the `ConfigService` to fetch the JWT secret for token verification.
+
+**[back to top](#table-of-contents)**
 
 ### Step 3: Implementing Authorization
 
@@ -376,6 +384,8 @@ RBAC is a widely-used approach to access control where permissions are assigned 
      }
    }
    ```
+
+**[back to top](#table-of-contents)**
 
 #### Claims-Based Authorization
 
@@ -481,6 +491,8 @@ Claims-based authorization allows defining specific claims (attributes or proper
      }
    }
    ```
+
+**[back to top](#table-of-contents)**
 
 #### CASL (Centralized Access Control List)
 
@@ -595,6 +607,8 @@ CASL provides a way to manage and check permissions in a more granular and expre
    }
    ```
 
+**[back to top](#table-of-contents)**
+
 #### Comparison of Authorization Approaches
 
 Here's a comparative summary of RBAC, claims-based authorization, and CASL:
@@ -615,8 +629,12 @@ Here's a comparative summary of RBAC, claims-based authorization, and CASL:
 
 Choosing the right authorization approach (RBAC, claims-based, or CASL) depends on your application's complexity, security requirements, and management preferences. RBAC is straightforward and effective for many applications but may lack the flexibility needed in dynamic environments. Claims-based authorization offers more flexibility but requires careful management. CASL provides powerful capabilities for fine-grained access control but introduces additional complexity. Consider your application's specific needs and security considerations when selecting and implementing an authorization strategy.
 
+**[back to top](#table-of-contents)**
+
 ## Conclusion
 
 By following these steps, you can implement authentication and authorization in your NestJS backend application.
 
 For advanced features like OAuth2, additional strategies and configurations may be required, but the basic principles remain consistent. Always ensure to follow security best practices and keep your authentication and authorization mechanisms updated.
+
+**[back to top](#table-of-contents)**
