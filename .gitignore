@@ -130,3 +130,4 @@ dist
 .pnp.*
 
 .husky
+.DS_Store
